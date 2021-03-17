@@ -37,3 +37,11 @@ Route::middleware(['auth:sanctum', 'verified'])
         Route::resource('users', UserController::class);
 });
 
+Route::get('layout1', function() {
+    return Inertia::render('TesteLayouts/Layout1');
+});
+
+Route::get('layout2', function() {
+    return Inertia::render('TesteLayouts/Layout2');
+});
+
