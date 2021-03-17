@@ -1,5 +1,9 @@
 {
     "private": true,
+    "engines": {
+        "node": "15.8.0",
+        "npm": "7.5.4"
+    },
     "scripts": {
         "dev": "npm run development",
         "development": "mix",
@@ -7,7 +11,10 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production"
+        "production": "mix --production",
+        "postinstall": "npm run production",
+        "heroku-prebuild": "npm install -f",
+        "heroku-postbuild": "npm run production"
     },
     "devDependencies": {
         "@inertiajs/inertia": "^0.8.4",
@@ -25,5 +32,9 @@
         "tailwindcss": "^2.0.1",
         "vue": "^3.0.5",
         "vue-loader": "^16.1.2"
+    },
+    "dependencies": {
+        "chart.js": "2.9.3",
+        "popper.js": "1.16.0"
     }
 }
