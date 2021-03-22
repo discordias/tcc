@@ -27,21 +27,20 @@ Route::get('/', function () {
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
-
 })->name('dashboard');
 
 Route::middleware(['auth:sanctum', 'verified'])
     ->prefix('admin')
     ->name('admin.')
-    ->group(function() {
+    ->group(function () {
         Route::resource('users', UserController::class);
-});
+        Route::resource('vertifivados', UserController::class);
+    });
 
-Route::get('layout1', function() {
+Route::get('layout1', function () {
     return Inertia::render('TesteLayouts/Layout1');
 });
 
-Route::get('layout2', function() {
+Route::get('layout2', function () {
     return Inertia::render('TesteLayouts/Layout2');
 });
-

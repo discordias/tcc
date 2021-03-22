@@ -11,9 +11,16 @@ module.exports = {
 
     theme: {
         extend: {
+
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                'orange-uniceplac': '#d68749',
+                'green-uniceplac': '#00734F',
+
+            },
+
         },
     },
 
