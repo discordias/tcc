@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,12 +47,7 @@ Route::get('layout2', function() {
     return Inertia::render('TesteLayouts/Layout2');
 });
 
+// testando permissão
 Route::get('layout3', function() {
     return Inertia::render('TesteLayouts/Layout3');
-});
-
-Route::get('perfil', function () {
-    $user = auth()->user();
-
-    dd($user->teams);
-});
+})->middleware(['can:store users']);
