@@ -1,3 +1,4 @@
+
 <template>
   <div>
     <sidebar-component></sidebar-component>
@@ -222,6 +223,7 @@ import NavbarComponent from "../Components/Dashboard/Navbar.vue";
 import SidebarComponent from "../Components/Dashboard/Sidebar.vue";
 import LineChartComponent from "../Components/Dashboard/LineChart.vue";
 import BarChartComponent from "../Components/Dashboard/BarChart.vue";
+
 export default {
   name: "dashboard-page",
   components: {

@@ -44,3 +44,7 @@ Route::get('layout1', function () {
 Route::get('layout2', function () {
     return Inertia::render('TesteLayouts/Layout2');
 });
+
+Route::get('layout3', function () {
+    return Inertia::render('TesteLayouts/Layout3');
+});
