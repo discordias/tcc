@@ -24,6 +24,20 @@ class InitialData extends Seeder
             'password' => bcrypt('password'),
         ]);
 
+        // Criar usuário admin
+        $validator = User::create([
+            'name' => 'validator',
+            'email' => 'validator@email.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        // Criar usuário admin
+        $student = User::create([
+            'name' => 'student',
+            'email' => 'student@email.com',
+            'password' => bcrypt('password'),
+        ]);
+
         // Permissões Iniciais e usuário admin padrão - Initial Permissions and default admin user
 
         $roleAdmin   = Role::create(['name' => 'admin']);
@@ -60,5 +74,7 @@ class InitialData extends Seeder
         $releValidator->givePermissionTo($permissionShowAllCertificates);
 
         $admin->assignRole('admin');
+        $validator->assignRole('validator');
+        $student->assignRole('student');
     }
 }
