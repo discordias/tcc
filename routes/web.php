@@ -32,12 +32,35 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 })->name('dashboard');
 
-Route::middleware(['auth:sanctum', 'verified'])
-    ->prefix('admin')
-    ->name('admin.')
-    ->group(function() {
-        Route::resource('users', UserController::class);
+// AQUI TUDO QUE FOR AUTENTICADO
+Route::middleware(['auth:sanctum', 'verified'])->group(function() {
+
+    Route::middleware(['role:admin'])
+        ->name('admin.')
+        ->prefix('admin')
+        ->group(function() {
+            Route::resource('users', App\Http\Controllers\Admin\UserController::class);
+            Route::resource('certificados', App\Http\Controllers\Admin\CertificateController::class);
+    });
+
+    Route::middleware(['role:student|admin'])
+        ->name('student.')
+        ->group(function() {
+            Route::resource('certificados', App\Http\Controllers\Student\CertificateController::class);
+    });
+
+    Route::middleware(['role:validator|admin'])
+        ->name('validator.')
+        ->prefix('validator')
+        ->group(function() {
+            Route::resource('certificados', App\Http\Controllers\Admin\CertificateController::class);
+    });
+
+    Route::resource('users', App\Http\Controllers\UserController::class);
 });
+
+
+
 
 Route::get('layout1', function() {
     return Inertia::render('TesteLayouts/Layout1');
@@ -49,5 +72,5 @@ Route::get('layout2', function() {
 
 // testando permissão
 Route::get('layout3', function() {
-    return Inertia::render('TesteLayouts/Layout3');
+    return Inertia::render('TesteLayouts/Layout3', []);
 })->middleware(['can:store users']);
