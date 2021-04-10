@@ -7,6 +7,8 @@ import { InertiaProgress } from '@inertiajs/progress';
 import VueEllipseProgress from 'vue-ellipse-progress';
 
 
+import VueApexCharts from "vue3-apexcharts";
+
 const el = document.getElementById('app');
 
 createApp({
@@ -17,7 +19,9 @@ createApp({
         }),
 })
     .mixin({ methods: { route } })
-    .use(InertiaPlugin, VueEllipseProgress)
+    .use(InertiaPlugin)
+    .use(VueEllipseProgress)
+    .use(VueApexCharts)
     .mount(el);
 
 InertiaProgress.init({ color: '#4B5563' });
