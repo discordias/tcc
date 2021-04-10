@@ -57,6 +57,17 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
     });
 
     Route::resource('users', App\Http\Controllers\UserController::class);
+
+    // EIXO
+    Route::name('eixo.')
+        ->prefix('eixo')
+        ->group(function () {
+            Route::post('', [App\Http\Controllers\AxleController::class, 'store'])->middleware(['can:store axles'])->name('store');
+            Route::put('{id}', [App\Http\Controllers\AxleController::class, 'update'])->middleware(['can:update axles'])->name('store');
+            Route::get('create', [App\Http\Controllers\AxleController::class, 'create'])->middleware(['can:store axles'])->name('create');
+            Route::get('{id}/edit/', [App\Http\Controllers\AxleController::class, 'edit'])->middleware(['can:update axles'])->name('edit');
+            Route::get('', [App\Http\Controllers\AxleController::class, 'index'])->middleware(['can:store axles'])->name('index');
+        });
 });
 
 

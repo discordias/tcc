@@ -2,7 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -36,8 +39,22 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request)
     {
+        if (isset(auth()->user()->id)) {
+            $user = User::with('roles')->find(auth()->user()->id);
+        } else {
+            $user = null;
+        }
+
+        // Inertia::share('roles', $roles);
+
+
+
         return array_merge(parent::share($request), [
-            //
+            'hasHole' => [
+                'admin' => isset($user) ? $user->hasRole('admin') : false,
+                'validator' => isset($user) ? $user->hasRole('validator') : false,
+                'student' => isset($user) ? $user->hasRole('student') : false,
+            ]
         ]);
     }
 }
