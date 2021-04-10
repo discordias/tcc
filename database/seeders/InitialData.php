@@ -39,13 +39,15 @@ class InitialData extends Seeder
         ]);
 
         // Permissões Iniciais e usuário admin padrão - Initial Permissions and default admin user
-
         $roleAdmin   = Role::create(['name' => 'admin']);
         $roleStudent = Role::create(['name' => 'student']);
         $releValidator   = Role::create(['name' => 'validator']);
 
         $permissionStoreUsers = Permission::create(['name' => 'store users']);
         $permissionUpdateUsers = Permission::create(['name' => 'update users']);
+        $permissionStoreAxle = Permission::create(['name' => 'store axles']);
+        $permissionUpdateAxle = Permission::create(['name' => 'update axles']);
+        $permissionDeleteAxle = Permission::create(['name' => 'delete axles']);
 
         $permissionStoreCertificates = Permission::create(['name' => 'store certificates']);
         $permissionShowCertificates = Permission::create(['name' => 'show certificates']);
@@ -57,11 +59,14 @@ class InitialData extends Seeder
         $permissionListAllCertificates = Permission::create(['name' => 'list all certificates']);
         $permissionShowAllCertificates = Permission::create(['name' => 'show all certificates']);
 
-        // Give permissions to Admin
+        // // Give permissions to Admin
         $roleAdmin->givePermissionTo($permissionStoreUsers);
         $roleAdmin->givePermissionTo($permissionUpdateUsers);
+        $roleAdmin->givePermissionTo($permissionStoreAxle);
+        $roleAdmin->givePermissionTo($permissionUpdateAxle);
+        $roleAdmin->givePermissionTo($permissionDeleteAxle);
 
-        // Give permissions to Student
+        // // Give permissions to Student
         $roleStudent->givePermissionTo($permissionStoreCertificates);
         $roleStudent->givePermissionTo($permissionShowCertificates);
         $roleStudent->givePermissionTo($permissionListCertificates);
@@ -76,5 +81,6 @@ class InitialData extends Seeder
         $admin->assignRole('admin');
         $validator->assignRole('validator');
         $student->assignRole('student');
+
     }
 }

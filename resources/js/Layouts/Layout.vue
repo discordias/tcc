@@ -210,6 +210,10 @@ import NavbarComponent from "../Components/Dashboard/Navbar.vue";
 import SidebarComponent from "../Components/Dashboard/Sidebar.vue";
 import LineChartComponent from "../Components/Dashboard/LineChart.vue";
 import BarChartComponent from "../Components/Dashboard/BarChart.vue";
+
+import { computed } from 'vue'
+import { usePage } from '@inertiajs/inertia-vue3'
+
 export default {
   name: "dashboard-page",
   components: {
@@ -222,6 +226,10 @@ export default {
     return {
       date: new Date().getFullYear()
     }
-  }
+  },
+  setup() {
+    const hasHole = computed(() => usePage().props.value.hasHole)
+    return { hasHole }
+  },
 };
 </script>
