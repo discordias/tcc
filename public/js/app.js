@@ -19541,13 +19541,13 @@ var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
   type: "text",
   placeholder: "Search",
-  "class": "px-3 py-2 h-12 border border-solid  border-gray-600 placeholder-gray-400 text-gray-700 bg-white rounded text-base leading-snug shadow-none outline-none focus:outline-none w-full font-normal"
+  "class": "px-3 py-2 h-12 border border-solid border-gray-600 placeholder-gray-400 text-gray-700 bg-white rounded text-base leading-snug shadow-none outline-none focus:outline-none w-full font-normal"
 })])], -1
 /* HOISTED */
 );
 
 var _hoisted_14 = {
-  "class": "md:flex-col md:min-w-full flex flex-col list-none"
+  "class": "md:flex-col md:min-w-full flex flex-col list-none md:mb-4"
 };
 var _hoisted_15 = {
   key: 0,
