@@ -54,24 +54,20 @@
 </template>
 
 <script>
-import Layout from '../../Layouts/Layout';
-import Pagination from '../../Shared/Pagination';
+import Layout from "../../Layouts/Layout";
+import Pagination from "../../Shared/Pagination";
 
 export default {
-    components: { Layout, Pagination },
-    props: {
-        axles: Object
-    },
-    data() {
-        return {
-        }
-    },
-    methods: {
-
-    }
-}
+  components: { Layout, Pagination },
+  props: {
+    axles: Object,
+  },
+  data() {
+    return {};
+  },
+  methods: {},
+};
 </script>
 
 <style lang="">
-
 </style>

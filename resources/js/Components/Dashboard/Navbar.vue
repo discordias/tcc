@@ -10,8 +10,8 @@
       <a
         class="text-white text-sm uppercase hidden lg:inline-block font-semibold"
         href="https://www.creative-tim.com/learning-lab/tailwind-starter-kit#/dashboard"
-        >Dashboard</a
-      >
+        ><img src="/assets/logo3.png" width="200" height="200"
+      /></a>
       <!-- Form -->
       <form
         class="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-3"
@@ -29,9 +29,7 @@
         </div>
       </form>
       <!-- User -->
-      <ul
-        class="flex-col md:flex-row list-none items-center hidden md:flex"
-      >
+      <ul class="flex-col md:flex-row list-none items-center hidden md:flex">
         <user-dropdown-component></user-dropdown-component>
       </ul>
     </div>
@@ -43,7 +41,7 @@
 import UserDropdownComponent from "./UserDropdown.vue";
 export default {
   components: {
-    UserDropdownComponent
-  }
+    UserDropdownComponent,
+  },
 };
 </script>

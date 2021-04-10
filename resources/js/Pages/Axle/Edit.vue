@@ -17,38 +17,36 @@
 </template>
 
 <script>
-
-import Layout from '../../Layouts/Layout';
-import AxleForm from '../../Components/Forms/AxleForm';
+import Layout from "../../Layouts/Layout";
+import AxleForm from "../../Components/Forms/AxleForm";
 
 export default {
-    components: {
-        Layout,
-        AxleForm,
-    },
-    props: {
-        axle: {},
-    },
-    data() {
-        return {
-            form: {},
-        }
-    },
+  components: {
+    Layout,
+    AxleForm,
+  },
+  props: {
+    axle: {},
+  },
+  data() {
+    return {
+      form: {},
+    };
+  },
 
-    methods: {
-        salvar() {
-           this.form.put(this.route('eixo.store', this.axle.id), {
-                onFinish: () => this.form.reset(),
-            })
-        }
+  methods: {
+    salvar() {
+      this.form.put(this.route("eixo.update", this.axle.id), {
+        onFinish: () => this.form.reset(),
+      });
     },
+  },
 
-    mounted() {
-       this.form = this.$inertia.form(this.axle);
-    }
-}
+  mounted() {
+    this.form = this.$inertia.form(this.axle);
+  },
+};
 </script>
 
 <style lang="">
-
 </style>

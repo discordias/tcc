@@ -4,6 +4,8 @@ require('./bootstrap');
 import { createApp, h } from 'vue';
 import { App as InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
+import VueEllipseProgress from 'vue-ellipse-progress';
+
 
 import VueApexCharts from "vue3-apexcharts";
 
@@ -18,6 +20,7 @@ createApp({
 })
     .mixin({ methods: { route } })
     .use(InertiaPlugin)
+    .use(VueEllipseProgress)
     .use(VueApexCharts)
     .mount(el);
 
