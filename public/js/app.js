@@ -19557,7 +19557,7 @@ var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 );
 
 var _hoisted_14 = {
-  "class": "md:flex-col md:min-w-full flex flex-col list-none"
+  "class": "md:flex-col md:min-w-full flex flex-col list-none md:mb-4"
 };
 var _hoisted_15 = {
   key: 0,
