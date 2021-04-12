@@ -28,7 +28,7 @@ Route::get('/welcome', function () {
 
 // Redirecionar para pagina de usuários
 Route::get('/', function () {
-    return redirect('')->route('users.index');
+    return redirect()->route('users.index');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
@@ -75,6 +75,17 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             Route::put('{id}', [App\Http\Controllers\AxleController::class, 'update'])->middleware(['can:update axles'])->name('update');
             Route::get('create', [App\Http\Controllers\AxleController::class, 'create'])->middleware(['can:store axles'])->name('create');
             Route::get('{id}/edit/', [App\Http\Controllers\AxleController::class, 'edit'])->middleware(['can:update axles'])->name('edit');
+        });
+
+    // EIXO
+    Route::name('careers.')
+        ->prefix('cursos')
+        ->group(function () {
+            Route::get('', [App\Http\Controllers\CareerController::class, 'index'])->middleware(['can:store careers'])->name('index');
+            Route::post('', [App\Http\Controllers\CareerController::class, 'store'])->middleware(['can:store careers'])->name('store');
+            Route::put('{id}', [App\Http\Controllers\CareerController::class, 'update'])->middleware(['can:update careers'])->name('update');
+            Route::get('create', [App\Http\Controllers\CareerController::class, 'create'])->middleware(['can:store careers'])->name('create');
+            Route::get('{id}/edit/', [App\Http\Controllers\CareerController::class, 'edit'])->middleware(['can:update careers'])->name('edit');
         });
 });
 

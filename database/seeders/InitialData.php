@@ -49,6 +49,10 @@ class InitialData extends Seeder
         $permissionUpdateAxle = Permission::create(['name' => 'update axles']);
         $permissionDeleteAxle = Permission::create(['name' => 'delete axles']);
 
+        $permissionStoreCareers = Permission::create(['name' => 'store careers']);
+        $permissionUpdateCareers = Permission::create(['name' => 'update careers']);
+        $permissionDeleteCareers = Permission::create(['name' => 'delete careers']);
+
         $permissionStoreCertificates = Permission::create(['name' => 'store certificates']);
         $permissionShowCertificates = Permission::create(['name' => 'show certificates']);
         $permissionListCertificates = Permission::create(['name' => 'list certificates']);
@@ -65,6 +69,9 @@ class InitialData extends Seeder
         $roleAdmin->givePermissionTo($permissionStoreAxle);
         $roleAdmin->givePermissionTo($permissionUpdateAxle);
         $roleAdmin->givePermissionTo($permissionDeleteAxle);
+        $roleAdmin->givePermissionTo($permissionStoreCareers);
+        $roleAdmin->givePermissionTo($permissionUpdateCareers);
+        $roleAdmin->givePermissionTo($permissionDeleteCareers);
 
         // // Give permissions to Student
         $roleStudent->givePermissionTo($permissionStoreCertificates);

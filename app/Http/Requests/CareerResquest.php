@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AxleRequest extends FormRequest
+class CareerResquest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class AxleRequest extends FormRequest
     {
         return [
             'name' => 'required|max:100',
-            'description' => 'required'
+            'code' => 'required|max:50'
         ];
     }
 
@@ -35,6 +35,7 @@ class AxleRequest extends FormRequest
             'name.required' => 'Nome é obrigatório',
             'name.max' => 'Máximo de 100 caracteres para o campo nome',
             'description.required' => 'Descrição é obrigatória',
+            'description.max' => 'Máximo de 50 caracteres para o campo nome',
         ];
     }
 }
