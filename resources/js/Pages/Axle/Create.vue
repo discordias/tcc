@@ -27,6 +27,7 @@ export default {
         AxleForm,
     },
     props: {
+        errors: Object,
     },
     data() {
         return {
@@ -40,7 +41,14 @@ export default {
     methods: {
         salvar() {
            this.form.post(this.route('eixo.store'), {
-                onFinish: () => this.form.reset(),
+                onFinish: () => {
+                    if (!this.isEmpty(this.errors)) {
+                        alert('Erro aqui ' + this.formatTextErrors(this.errors));
+                    } else {
+                        this.form.reset();
+                        alert('Cadastrado com sucesso');
+                    }
+                },
             })
         }
     },

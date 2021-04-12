@@ -5,7 +5,7 @@
                 <div class="grid grid-cols-3 gap-4 mb-4">
                     <div class="col-span-2">
                         <label for="axle_name">Nome</label>
-                        <input type="text" class="w-full" id="axle_name" v-model="form.name" autofocus/>
+                        <input type="text" class="w-full" id="axle_name" maxlength="100" required v-model="form.name" autofocus/>
                     </div>
                 </div>
                 <div>
@@ -14,6 +14,7 @@
                                 class="w-full"
                                 id="axle_description"
                                 rows="5"
+                                required
                                 v-model="form.description"></textarea>
                 </div>
 

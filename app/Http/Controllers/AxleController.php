@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AxleRequest;
 use App\Models\Axle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -39,11 +40,13 @@ class AxleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AxleRequest $request)
     {
-        Axle::create($request->only('name', 'description'));
+        $validated = $request->validated();
 
-        return Redirect::route('eixo.index');
+        Axle::create($validated);
+
+        return Redirect::back();
     }
 
     /**
@@ -79,15 +82,18 @@ class AxleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AxleRequest $request, $id)
     {
+        $validated = $request->validated();
+
         $axle = Axle::findOrFail($id);
-        $axle->name = $request->name;
-        $axle->description = $request->description;
+
+        $axle->name = $validated['name'];
+        $axle->description = $validated['description'];
 
         $axle->save();
 
-        return Redirect::route('eixo.index');
+        return Redirect::back();
     }
 
     /**

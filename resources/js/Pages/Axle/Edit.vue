@@ -27,6 +27,7 @@ export default {
   },
   props: {
     axle: {},
+    errors: Object,
   },
   data() {
     return {
@@ -37,7 +38,13 @@ export default {
   methods: {
     salvar() {
       this.form.put(this.route("eixo.update", this.axle.id), {
-        onFinish: () => this.form.reset(),
+        onFinish: () => {
+            if (!this.isEmpty(this.errors)) {
+                alert(this.formatTextErrors(this.errors));
+            } else {
+                alert('Atualizado com sucesso');
+            }
+        },
       });
     },
   },
