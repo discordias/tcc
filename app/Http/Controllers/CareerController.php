@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AxleRequest;
-use App\Models\Axle;
+use App\Http\Requests\CareerResquest;
+use App\Models\Career;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
-class AxleController extends Controller
+class CareerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +17,10 @@ class AxleController extends Controller
      */
     public function index()
     {
-        $axles = Axle::paginate(10);
+        $careers = Career::paginate(10);
 
-        return Inertia::render('Axle/Index', [
-            'axles' => $axles,
+        return Inertia::render('Career/Index', [
+            'careers' => $careers,
         ]);
     }
 
@@ -31,7 +31,7 @@ class AxleController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Axle/Create');
+        return Inertia::render('Career/Create');
     }
 
     /**
@@ -40,11 +40,11 @@ class AxleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AxleRequest $request)
+    public function store(CareerResquest $request)
     {
         $validated = $request->validated();
 
-        Axle::create($validated);
+        Career::create($validated);
 
         return Redirect::back();
     }
@@ -68,10 +68,10 @@ class AxleController extends Controller
      */
     public function edit($id)
     {
-        $axle = Axle::findOrFail($id);
+        $career = Career::findOrFail($id);
 
-        return Inertia::render('Axle/Edit', [
-            'axle' => $axle,
+        return Inertia::render('Career/Edit', [
+            'career' => $career,
         ]);
     }
 
@@ -82,16 +82,16 @@ class AxleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(AxleRequest $request, $id)
+    public function update(CareerResquest $request, $id)
     {
         $validated = $request->validated();
 
-        $axle = Axle::findOrFail($id);
+        $career = Career::findOrFail($id);
 
-        $axle->name = $validated['name'];
-        $axle->description = $validated['description'];
+        $career->name = $validated['name'];
+        $career->code = $validated['code'];
 
-        $axle->save();
+        $career->save();
 
         return Redirect::back();
     }

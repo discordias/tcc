@@ -18,7 +18,17 @@ createApp({
             resolveComponent: (name) => require(`./Pages/${name}`).default,
         }),
 })
-    .mixin({ methods: { route } })
+    .mixin({ methods: {
+        route,
+        isEmpty(obj) {
+            return Object.keys(obj).length === 0;
+        },
+        formatTextErrors(errors) {
+            return Object
+                .entries(errors)
+                .reduce( (accum, curr) => (accum === '') ? curr[1] : `${accum} - ${curr[1]}`, '');
+        }
+    } })
     .use(InertiaPlugin)
     .use(VueEllipseProgress)
     .use(VueApexCharts)
