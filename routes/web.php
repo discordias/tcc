@@ -5,7 +5,6 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,13 +17,18 @@ use Spatie\Permission\Models\Role;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
+});
+
+// Redirecionar para pagina de usuários
+Route::get('/', function () {
+    return redirect('')->route('users.index');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
@@ -38,7 +42,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         ->name('admin.')
         ->prefix('admin')
         ->group(function () {
-            Route::resource('users', App\Http\Controllers\Admin\UserController::class);
+            // Route::resource('users', App\Http\Controllers\Admin\UserController::class);
             Route::resource('certificados', App\Http\Controllers\Admin\CertificateController::class);
         });
 
@@ -55,17 +59,22 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             Route::resource('certificados', App\Http\Controllers\Admin\CertificateController::class);
         });
 
-    Route::resource('users', App\Http\Controllers\UserController::class);
+    // USUÁRIO
+    Route::name('users.')
+        ->prefix('usuarios')
+        ->group(function () {
+            Route::get('', [App\Http\Controllers\UserController::class, 'index'])->name('index');
+        });
 
     // EIXO
     Route::name('eixo.')
         ->prefix('eixo')
         ->group(function () {
+            Route::get('', [App\Http\Controllers\AxleController::class, 'index'])->middleware(['can:store axles'])->name('index');
             Route::post('', [App\Http\Controllers\AxleController::class, 'store'])->middleware(['can:store axles'])->name('store');
             Route::put('{id}', [App\Http\Controllers\AxleController::class, 'update'])->middleware(['can:update axles'])->name('update');
             Route::get('create', [App\Http\Controllers\AxleController::class, 'create'])->middleware(['can:store axles'])->name('create');
             Route::get('{id}/edit/', [App\Http\Controllers\AxleController::class, 'edit'])->middleware(['can:update axles'])->name('edit');
-            Route::get('', [App\Http\Controllers\AxleController::class, 'index'])->middleware(['can:store axles'])->name('index');
         });
 });
 

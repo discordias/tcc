@@ -69,6 +69,15 @@
         </form>
         <!-- Navigation -->
         <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
+          <li class="items-center">
+            <inertia-link
+              class="text-white hover:text-gray-200 text-xm uppercase py-3 font-bold block"
+              href="/usuarios"
+              ><i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
+              Perfil</inertia-link
+            >
+        </li>
+
           <li v-if="hasHole.admin" class="items-center">
             <inertia-link
               class="text-white hover:text-gray-200 text-xm uppercase py-3 font-bold block"
