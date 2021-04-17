@@ -42,8 +42,16 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         ->name('admin.')
         ->prefix('admin')
         ->group(function () {
-            // Route::resource('users', App\Http\Controllers\Admin\UserController::class);
-            Route::resource('certificados', App\Http\Controllers\Admin\CertificateController::class);
+            Route::name('students.')
+                ->prefix('alunos')
+                ->group(function () {
+                    Route::get('', [App\Http\Controllers\Admin\StudentController::class, 'index'])->name('index');
+                    Route::post('', [App\Http\Controllers\Admin\StudentController::class, 'store'])->name('store');
+                    Route::put('{id}', [App\Http\Controllers\Admin\StudentController::class, 'update'])->name('update');
+                    Route::get('create', [App\Http\Controllers\Admin\StudentController::class, 'create'])->name('create');
+                    Route::get('{id}/edit/', [App\Http\Controllers\Admin\StudentController::class, 'edit'])->name('edit');
+        });
+            // Route::resource('certificados', App\Http\Controllers\Admin\CertificateController::class);
         });
 
     Route::middleware(['role:student|admin'])
