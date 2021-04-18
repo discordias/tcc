@@ -108,6 +108,17 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             Route::get('create', [App\Http\Controllers\CareerController::class, 'create'])->middleware(['can:store careers'])->name('create');
             Route::get('{id}/edit/', [App\Http\Controllers\CareerController::class, 'edit'])->middleware(['can:update careers'])->name('edit');
         });
+
+    // Administrador gerencia situações
+    Route::name('typeSituations.')
+        ->prefix('situacoes')
+        ->group(function () {
+            Route::get('', [App\Http\Controllers\TypeSituationController::class, 'index'])->name('index');
+            Route::post('', [App\Http\Controllers\TypeSituationController::class, 'store'])->name('store');
+            Route::put('{id}', [App\Http\Controllers\TypeSituationController::class, 'update'])->name('update');
+            Route::get('create', [App\Http\Controllers\TypeSituationController::class, 'create'])->name('create');
+            Route::get('{id}/edit/', [App\Http\Controllers\TypeSituationController::class, 'edit'])->name('edit');
+        });
 });
 
 

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\TypeSituation;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Crypt;
@@ -88,6 +89,10 @@ class InitialData extends Seeder
         $admin->assignRole('admin');
         $validator->assignRole('validator');
         $student->assignRole('student');
+
+        TypeSituation::create(['name' => 'Enviado']);
+        TypeSituation::create(['name' => 'Aceito']);
+        TypeSituation::create(['name' => 'Negado']);
 
     }
 }

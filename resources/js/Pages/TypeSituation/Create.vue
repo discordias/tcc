@@ -1,0 +1,63 @@
+<template lang="">
+    <div class="grid-cols-12">
+        <layout >
+            <div class="flex justify-between">
+                    <div class="text-black text-4xl">
+                        Situações
+                    </div>
+                    <inertia-link
+                        class="text-white text-center text-xl capitalize rounded-md bg-green-500 hover:bg-green-600 pl-2 pr-3 py-3 font-bold"
+                        :href="this.route('typeSituations.index')"
+                        ><i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
+                        Lista</inertia-link>
+            </div>
+            <Type-situation-form :form="form" @salvar="salvar"></Type-situation-form>
+        </layout>
+    </div>
+</template>
+
+<script>
+
+import Layout from '../../Layouts/Layout';
+import TypeSituationForm from '../../Components/Forms/TypeSituationForm';
+
+export default {
+    components: {
+        Layout,
+        TypeSituationForm,
+    },
+    props: {
+        errors: Object,
+    },
+    data() {
+        return {
+            form: this.$inertia.form({
+                name: '',
+                code: '',
+            })
+        }
+    },
+
+    methods: {
+        salvar() {
+            // this.flashMessage.show({status: 'error', title: 'Error Message Title', message: 'Oh, you broke my heart! Shame on you!'})
+           this.form.post(this.route('typeSituations.store'), {
+                onFinish: () => {
+                    if (!this.isEmpty(this.errors)) {
+                        this.toast(this.formatTextErrors(this.errors), {type: 'error'});
+                    } else {
+                        this.form.reset();
+                        if (this.$page.props.flash.success) {
+                            this.toast(this.$page.props.flash.success, {type: 'success'});
+                        }
+                    }
+                },
+            })
+        }
+    },
+ }
+</script>
+
+<style lang="">
+
+</style>

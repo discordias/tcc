@@ -41,7 +41,7 @@ export default {
     },
     methods: {
         salvar() {
-            this.$emit('salvar', { minhaMsg: 'a'})
+            this.$emit('salvar')
         }
     },
 }
