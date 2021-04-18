@@ -151,7 +151,7 @@
       <div
         class="px-4 md:px-10 mx-auto w-full -m-24 h-full flex flex-col justify-between"
       >
-        <div class="mt-4 relative">
+        <div class="mt-4 relative p-40">
           <slot />
         </div>
 

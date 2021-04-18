@@ -1,8 +1,8 @@
 <template lang="">
     <div class="grid-cols-12">
-        <layout>
+        <layout >
             <div class="flex justify-between">
-                    <div class="text-white text-4xl">
+                    <div class="text-black text-4xl">
                         Cursos
                     </div>
                     <inertia-link
@@ -40,6 +40,7 @@ export default {
 
     methods: {
         salvar() {
+            // this.flashMessage.show({status: 'error', title: 'Error Message Title', message: 'Oh, you broke my heart! Shame on you!'})
            this.form.post(this.route('careers.store'), {
                 onFinish: () => {
                     if (!this.isEmpty(this.errors)) {

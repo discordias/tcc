@@ -99,9 +99,18 @@
             <li v-if="hasHole.admin" class="items-center">
                 <inertia-link
                     class="text-white hover:text-gray-200 text-xm uppercase py-3 font-bold block"
-                    href="/admin/alunos"
+                    :href="this.route('admin.students.index')"
                     ><i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
                     Alunos</inertia-link
+                >
+            </li>
+
+            <li v-if="hasHole.admin" class="items-center">
+                <inertia-link
+                    class="text-white hover:text-gray-200 text-xm uppercase py-3 font-bold block"
+                    :href="this.route('admin.validators.index')"
+                    ><i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
+                    Validadores</inertia-link
                 >
             </li>
         </ul>

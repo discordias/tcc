@@ -42,6 +42,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         ->name('admin.')
         ->prefix('admin')
         ->group(function () {
+            // Administrador gerencia alunos
             Route::name('students.')
                 ->prefix('alunos')
                 ->group(function () {
@@ -50,7 +51,19 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
                     Route::put('{id}', [App\Http\Controllers\Admin\StudentController::class, 'update'])->name('update');
                     Route::get('create', [App\Http\Controllers\Admin\StudentController::class, 'create'])->name('create');
                     Route::get('{id}/edit/', [App\Http\Controllers\Admin\StudentController::class, 'edit'])->name('edit');
-        });
+            });
+
+            // Administrador gerencia validadores
+            Route::name('validators.')
+                ->prefix('validadores')
+                ->group(function () {
+                    Route::get('', [App\Http\Controllers\Admin\ValidatorController::class, 'index'])->name('index');
+                    Route::post('', [App\Http\Controllers\Admin\ValidatorController::class, 'store'])->name('store');
+                    Route::put('{id}', [App\Http\Controllers\Admin\ValidatorController::class, 'update'])->name('update');
+                    Route::get('create', [App\Http\Controllers\Admin\ValidatorController::class, 'create'])->name('create');
+                    Route::get('{id}/edit/', [App\Http\Controllers\Admin\ValidatorController::class, 'edit'])->name('edit');
+            });
+
             // Route::resource('certificados', App\Http\Controllers\Admin\CertificateController::class);
         });
 
