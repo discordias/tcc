@@ -62,7 +62,7 @@ class StudentController extends Controller
             $user->assignRole('student');
 
             DB::commit();
-            return Redirect::back();
+            return Redirect::back()->with('success', 'Cadastrado com Sucesso!');
         } catch (\Exception $e) {
 
             DB::rollBack();
@@ -122,7 +122,7 @@ class StudentController extends Controller
         $student->career_id = $validated['career_id'];
         $student->save();
 
-        return Redirect::back();
+        return Redirect::back()->with('success', 'Atualizado com Sucesso!');
     }
 
     /**

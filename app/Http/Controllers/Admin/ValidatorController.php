@@ -57,7 +57,7 @@ class ValidatorController extends Controller
             $user->assignRole('validator');
 
             DB::commit();
-            return Redirect::back();
+            return Redirect::back()->with('success', 'Cadastrado com Sucesso!');
         } catch (\Exception $e) {
 
             DB::rollBack();
@@ -87,8 +87,8 @@ class ValidatorController extends Controller
     public function edit($id)
     {
         $validator = User::where('id', $id)
-        ->whereHas('roles', fn ($roles) => $roles->where('name', 'validator'))
-        ->firstOrFail();
+            ->whereHas('roles', fn ($roles) => $roles->where('name', 'validator'))
+            ->firstOrFail();
 
         return Inertia::render('Admin/Validators/Edit', [
             'validator' => $validator,
@@ -108,13 +108,13 @@ class ValidatorController extends Controller
         ->whereHas('roles', fn ($roles) => $roles->where('name', 'validator'))
         ->firstOrFail();
 
-    $validated = $request->validated();
+        $validated = $request->validated();
 
-    $validator->name = $validated['name'];
-    $validator->email = $validated['email'];
-    $validator->save();
+        $validator->name = $validated['name'];
+        $validator->email = $validated['email'];
+        $validator->save();
 
-    return Redirect::back();
+        return Redirect::back()->with('success', 'Atualizado com Sucesso!');
     }
 
     /**

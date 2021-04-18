@@ -47,7 +47,9 @@ export default {
                         this.toast(this.formatTextErrors(this.errors), {type: 'error'});
                     } else {
                         this.form.reset();
-                        this.toast('Cadastrado com sucesso', {type: 'success'});
+                        if (this.$page.props.flash.success) {
+                            this.toast(this.$page.props.flash.success, {type: 'success'});
+                        }
                     }
                 },
             })

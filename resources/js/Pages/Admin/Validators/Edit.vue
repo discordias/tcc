@@ -42,7 +42,9 @@ export default {
             if (!this.isEmpty(this.errors)) {
                 this.toast(this.formatTextErrors(this.errors), {type: 'error'});
             } else {
-                this.toast('Cadastrado com sucesso', {type: 'success'});
+                if (this.$page.props.flash.success) {
+                    this.toast(this.$page.props.flash.success, {type: 'success'});
+                }
             }
         },
       });

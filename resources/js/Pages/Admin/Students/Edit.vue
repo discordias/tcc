@@ -43,7 +43,9 @@ export default {
             if (!this.isEmpty(this.errors)) {
                 alert(this.formatTextErrors(this.errors));
             } else {
-                alert('Atualizado com sucesso');
+                if (this.$page.props.flash.success) {
+                    this.toast(this.$page.props.flash.success, {type: 'success'});
+                }
             }
         },
       });
