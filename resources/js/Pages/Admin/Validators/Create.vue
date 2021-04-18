@@ -40,13 +40,13 @@ export default {
 
     methods: {
         salvar() {
-           this.form.post(this.route('admin.validators.store'), {
+            this.form.post(this.route('admin.validators.store'), {
                 onFinish: () => {
                     if (!this.isEmpty(this.errors)) {
-                        alert('Erro aqui ' + this.formatTextErrors(this.errors));
+                        this.toast(this.formatTextErrors(this.errors), {type: 'error'});
                     } else {
                         this.form.reset();
-                        alert('Cadastrado com sucesso');
+                        this.toast('Cadastrado com sucesso', {type: 'success'});
                     }
                 },
             })

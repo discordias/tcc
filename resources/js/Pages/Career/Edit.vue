@@ -40,9 +40,9 @@ export default {
       this.form.put(this.route("careers.update", this.career.id), {
         onFinish: () => {
             if (!this.isEmpty(this.errors)) {
-                alert(this.formatTextErrors(this.errors));
+                this.toast(this.formatTextErrors(this.errors), {type: 'error'});
             } else {
-                alert('Atualizado com sucesso');
+                this.toast('Cadastrado com sucesso', {type: 'success'});
             }
         },
       });
