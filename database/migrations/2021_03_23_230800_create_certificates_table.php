@@ -19,9 +19,13 @@ class CreateCertificatesTable extends Migration
                 ->constrained()
                 ->onUpdate('cascade');
             $table->foreignId('type_situation_id')
+                ->nullable()
+                ->default(null)
                 ->constrained()
                 ->onUpdate('cascade');
             $table->foreignId('axle_id')
+                ->nullable()
+                ->default(null)
                 ->constrained()
                 ->onUpdate('cascade');
             $table->string('title', 100);

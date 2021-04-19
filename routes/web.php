@@ -98,7 +98,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             Route::get('{id}/edit/', [App\Http\Controllers\AxleController::class, 'edit'])->middleware(['can:update axles'])->name('edit');
         });
 
-    // EIXO
+    // CURSOS
     Route::name('careers.')
         ->prefix('cursos')
         ->group(function () {
@@ -110,7 +110,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         });
 
     // Administrador gerencia situações
-    Route::name('typeSituations.')
+    Route::middleware(['role:admin'])
+        ->name('typeSituations.')
         ->prefix('situacoes')
         ->group(function () {
             Route::get('', [App\Http\Controllers\TypeSituationController::class, 'index'])->name('index');
@@ -118,6 +119,19 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             Route::put('{id}', [App\Http\Controllers\TypeSituationController::class, 'update'])->name('update');
             Route::get('create', [App\Http\Controllers\TypeSituationController::class, 'create'])->name('create');
             Route::get('{id}/edit/', [App\Http\Controllers\TypeSituationController::class, 'edit'])->name('edit');
+        });
+
+    // Certificados alunos
+    Route::middleware(['role:student'])
+        ->name('certificates.')
+        ->prefix('certificacoes')
+        ->group(function () {
+            Route::get('', [App\Http\Controllers\CertificateController::class, 'index'])->name('index');
+            Route::post('', [App\Http\Controllers\CertificateController::class, 'store'])->name('store');
+            Route::put('{id}', [App\Http\Controllers\CertificateController::class, 'update'])->name('update');
+            Route::get('create', [App\Http\Controllers\CertificateController::class, 'create'])->name('create');
+            Route::get('{id}/edit/', [App\Http\Controllers\CertificateController::class, 'edit'])->name('edit');
+            Route::get('{id}/download/', [App\Http\Controllers\CertificateController::class, 'download'])->name('download');
         });
 });
 
