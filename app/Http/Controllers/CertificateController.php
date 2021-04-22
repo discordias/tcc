@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CertificateRequest;
+use App\Models\Axle;
 use App\Models\Certificate;
+use App\Models\TypeSituation;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\MessageBag;
@@ -24,7 +26,7 @@ class CertificateController extends Controller
         $certificates = $user->certificates()->paginate(10);
 
         $certificates->load('typeSituation');
-        // dd($certificates);
+
         // $certificates->load('axle');
 
         return Inertia::render('Certificate/Index', [
@@ -54,7 +56,7 @@ class CertificateController extends Controller
 
         try {
 
-            $uploaded = $request->file('archive')->store('certificates/' . auth()->user()->id . '/');
+            $uploaded = $request->file('archive')->store('certificates/' . auth()->user()->id);
 
             $validated['archive'] = $uploaded;
             $validated['user_id'] = auth()->user()->id;
@@ -65,19 +67,10 @@ class CertificateController extends Controller
             return Redirect::back()->with('success', 'Cadastrado com Sucesso!');
 
         } catch (\Exception $e) {
-            dd($e);
             $errors = new MessageBag();
             $errors->add('store_certificate_error', 'Ocorreu um erro ao cadastrar o certificado, tente novamente');
             return Redirect::back()->withErrors($errors);
         }
-
-        // dd($request);
-
-        // $headers = array(
-        //     'Content-Type: application/pdf',
-        // );
-
-        // return Storage::download('certificates/MeVCKqdOR6puxGbnWweSg5Fz02gNNp72zLJP7ijF.pdf', 'teste.pdf', $headers);
 
     }
 
@@ -100,7 +93,13 @@ class CertificateController extends Controller
      */
     public function edit($id)
     {
-        //
+        $certificate = Certificate::where('id', $id)
+            ->where('user_id', auth()->user()->id)
+            ->firstOrFail();
+
+        return Inertia::render('Certificate/Edit', [
+            'certificate' => $certificate,
+        ]);
     }
 
     /**
@@ -110,9 +109,35 @@ class CertificateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CertificateRequest $request, $id)
     {
-        //
+        $validated = $request->validated();
+
+        $certificate = Certificate::where('id', $id)
+            ->where('user_id', auth()->user()->id)
+            ->firstOrFail();
+
+        $currentFile = $certificate->archive;
+
+        try {
+
+            $uploaded = $request->file('archive')->store('certificates/' . auth()->user()->id);
+
+            $validated['archive'] = $uploaded;
+            $certificate->description = $validated['description'];
+            $certificate->title = $validated['title'];
+            $certificate->archive = $uploaded;
+
+            $certificate->save();
+            Storage::delete($currentFile);
+
+            return Redirect::back()->with('success', 'Cadastrado com Sucesso!');
+
+        } catch (\Exception $e) {
+            $errors = new MessageBag();
+            $errors->add('store_certificate_error', 'Ocorreu um erro ao cadastrar o certificado, tente novamente');
+            return Redirect::back()->withErrors($errors);
+        }
     }
 
     /**
@@ -132,8 +157,12 @@ class CertificateController extends Controller
             ->where('user_id', auth()->user()->id)
             ->firstOrFail();
 
-        $headers = ['Content-Type: application/pdf'];
+        $filename = $certificate->title;
+        $path = storage_path('app/'. $certificate->archive);
 
-        return Storage::download($certificate->archive, 'mudar.pdf', $headers);
+        return Response::make(file_get_contents($path), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="'.$filename.'"'
+        ]);
     }
 }

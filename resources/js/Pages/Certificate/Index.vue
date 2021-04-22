@@ -46,8 +46,9 @@
                                         :href="this.route('certificates.edit', certificate.id)"
                                         ><span class="text-sm">Editar</span></inertia-link>
                                     <a  :href="this.route('certificates.download', certificate.id)"
+                                        target="_blank"
                                         class="text-white ml-2 text-center capitalize rounded-md bg-green-500 hover:bg-green-600 pl-2 pr-3 py-2 font-bold"
-                                    >Download</a>
+                                    >Visualizar</a>
                                 </td>
                             </tr>
 

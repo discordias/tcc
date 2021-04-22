@@ -1,7 +1,7 @@
 <template lang="">
     <div class="w-full">
-        <div class="bg-white shadow-md rounded my-6">
-            <form @submit.prevent="salvar" class="px-4 py-5 shadow">
+        <div class="my-6">
+            <form @submit.prevent="salvar" class="px-4 py-5">
                 <div class="grid grid-cols-4 gap-4 mb-4">
                     <div class="col-span-4">
                         <label for="certificate_title">Titulo</label>
@@ -39,7 +39,6 @@
 export default {
     props: {
         form: Object,
-        careers: Array,
     },
     data() {
         return {

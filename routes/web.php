@@ -63,21 +63,24 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
                     Route::get('create', [App\Http\Controllers\Admin\ValidatorController::class, 'create'])->name('create');
                     Route::get('{id}/edit/', [App\Http\Controllers\Admin\ValidatorController::class, 'edit'])->name('edit');
             });
-
-            // Route::resource('certificados', App\Http\Controllers\Admin\CertificateController::class);
-        });
-
-    Route::middleware(['role:student|admin'])
-        ->name('student.')
-        ->group(function () {
-            Route::resource('certificados', App\Http\Controllers\Student\CertificateController::class);
         });
 
     Route::middleware(['role:validator|admin'])
         ->name('validator.')
-        ->prefix('validator')
+        ->prefix('validador')
         ->group(function () {
-            Route::resource('certificados', App\Http\Controllers\Admin\CertificateController::class);
+
+            Route::name('certificates.')
+                ->prefix('certificados')
+                ->group(function () {
+                    Route::get('{type_situation?}', [App\Http\Controllers\ValidateCertificateController::class, 'index'])->name('index');
+                    Route::post('', [App\Http\Controllers\ValidateCertificateController::class, 'store'])->name('store');
+                    Route::post('{id}', [App\Http\Controllers\ValidateCertificateController::class, 'update'])->name('update');
+                    Route::get('create', [App\Http\Controllers\ValidateCertificateController::class, 'create'])->name('create');
+                    Route::get('{id}/edit/', [App\Http\Controllers\ValidateCertificateController::class, 'edit'])->name('edit');
+                    Route::get('{id}/download/', [App\Http\Controllers\ValidateCertificateController::class, 'download'])->name('download');
+                });
+
         });
 
     // USUÁRIO
@@ -128,7 +131,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         ->group(function () {
             Route::get('', [App\Http\Controllers\CertificateController::class, 'index'])->name('index');
             Route::post('', [App\Http\Controllers\CertificateController::class, 'store'])->name('store');
-            Route::put('{id}', [App\Http\Controllers\CertificateController::class, 'update'])->name('update');
+            Route::post('{id}', [App\Http\Controllers\CertificateController::class, 'update'])->name('update');
             Route::get('create', [App\Http\Controllers\CertificateController::class, 'create'])->name('create');
             Route::get('{id}/edit/', [App\Http\Controllers\CertificateController::class, 'edit'])->name('edit');
             Route::get('{id}/download/', [App\Http\Controllers\CertificateController::class, 'download'])->name('download');
