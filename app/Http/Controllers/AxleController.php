@@ -46,7 +46,7 @@ class AxleController extends Controller
 
         Axle::create($validated);
 
-        return Redirect::back();
+        return Redirect::back()->with('success', 'Cadastrado com Sucesso!');;
     }
 
     /**
@@ -93,7 +93,7 @@ class AxleController extends Controller
 
         $axle->save();
 
-        return Redirect::back();
+        return Redirect::back()->with('success', 'Atualizado com Sucesso!');
     }
 
     /**

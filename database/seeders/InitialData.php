@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\TypeSituation;
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Crypt;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -32,11 +32,11 @@ class InitialData extends Seeder
         ]);
 
         // Criar usuário admin
-        $student = User::create([
-            'name' => 'student',
-            'email' => 'student@email.com',
-            'password' => bcrypt('password'),
-        ]);
+        // $student = User::create([
+        //     'name' => 'student',
+        //     'email' => 'student@email.com',
+        //     'password' => bcrypt('password'),
+        // ]);
 
         // Permissões Iniciais e usuário admin padrão - Initial Permissions and default admin user
         $roleAdmin   = Role::create(['name' => 'admin']);
@@ -87,7 +87,11 @@ class InitialData extends Seeder
 
         $admin->assignRole('admin');
         $validator->assignRole('validator');
-        $student->assignRole('student');
+        // $student->assignRole('student');
+
+        TypeSituation::create(['name' => 'Enviado']);
+        TypeSituation::create(['name' => 'Aceito']);
+        TypeSituation::create(['name' => 'Negado']);
 
     }
 }

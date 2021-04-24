@@ -149,10 +149,25 @@
       <!-- Fim do HEADER -->
 
       <div
-        class="px-4 md:px-10 mx-auto w-full -m-24 h-full flex flex-col justify-between"
+        class="px-4 md:px-10 mx-auto w-full bg-gray-200 -m-24 h-full flex flex-col justify-between"
       >
-        <div class="mt-4 relative">
-          <slot />
+        <div class="w-full flex justify-center">
+            <div class="mt-4 w-full max-w-7xl relative bg-white p-10 shadow-md rounded-md ">
+                <!-- <div class="bg-white p-10 shadow-md rounded-md"> -->
+                    <div class="flex justify-between mb-20">
+                        <div v-if="title" class="text-black text-4xl">
+                            {{title}}
+                        </div>
+                        <inertia-link v-if="routeButton"
+                            class="text-white text-center text-xl capitalize rounded-md bg-green-500 hover:bg-green-600 pl-2 pr-3 py-3 font-bold"
+                            :href="this.route(routeButton)"
+                            ><i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
+                            {{ textButton }}</inertia-link>
+                    </div>
+                    <slot></slot>
+                <!-- </div> -->
+            </div>
+
         </div>
 
         <!-- FOOTER -->
@@ -234,6 +249,11 @@ export default {
     SidebarComponent,
     LineChartComponent,
     BarChartComponent,
+  },
+  props: {
+      title: null,
+      routeButton: null,
+      textButton: '',
   },
   data() {
     return {

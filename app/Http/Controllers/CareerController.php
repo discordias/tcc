@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CareerResquest;
 use App\Models\Career;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -46,7 +45,7 @@ class CareerController extends Controller
 
         Career::create($validated);
 
-        return Redirect::back();
+        return Redirect::back()->with('success', 'Cadastrado com Sucesso!');
     }
 
     /**
@@ -93,7 +92,7 @@ class CareerController extends Controller
 
         $career->save();
 
-        return Redirect::back();
+        return Redirect::back()->with('success', 'Atualizado com Sucesso!');
     }
 
     /**

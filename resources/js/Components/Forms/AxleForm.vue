@@ -1,7 +1,7 @@
 <template lang="">
     <div class="w-full">
-        <div class="bg-white shadow-md rounded my-6">
-            <form @submit.prevent="salvar" class="px-4 py-5 shadow">
+        <div class="bg-white my-6">
+            <form @submit.prevent="salvar" class="px-4 py-5">
                 <div class="grid grid-cols-3 gap-4 mb-4">
                     <div class="col-span-2">
                         <label for="axle_name">Nome</label>
@@ -41,7 +41,7 @@ export default {
     },
     methods: {
         salvar() {
-            this.$emit('salvar', { minhaMsg: 'a'})
+            this.$emit('salvar')
         }
     },
 }

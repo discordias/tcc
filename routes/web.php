@@ -42,21 +42,46 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         ->name('admin.')
         ->prefix('admin')
         ->group(function () {
-            // Route::resource('users', App\Http\Controllers\Admin\UserController::class);
-            Route::resource('certificados', App\Http\Controllers\Admin\CertificateController::class);
-        });
+            // Administrador gerencia alunos
+            Route::name('students.')
+                ->prefix('alunos')
+                ->group(function () {
+                    Route::get('', [App\Http\Controllers\Admin\StudentController::class, 'index'])->name('index');
+                    Route::post('', [App\Http\Controllers\Admin\StudentController::class, 'store'])->name('store');
+                    Route::put('{id}', [App\Http\Controllers\Admin\StudentController::class, 'update'])->name('update');
+                    Route::get('create', [App\Http\Controllers\Admin\StudentController::class, 'create'])->name('create');
+                    Route::get('{id}/edit/', [App\Http\Controllers\Admin\StudentController::class, 'edit'])->name('edit');
+            });
 
-    Route::middleware(['role:student|admin'])
-        ->name('student.')
-        ->group(function () {
-            Route::resource('certificados', App\Http\Controllers\Student\CertificateController::class);
+            // Administrador gerencia validadores
+            Route::name('validators.')
+                ->prefix('validadores')
+                ->group(function () {
+                    Route::get('', [App\Http\Controllers\Admin\ValidatorController::class, 'index'])->name('index');
+                    Route::post('', [App\Http\Controllers\Admin\ValidatorController::class, 'store'])->name('store');
+                    Route::put('{id}', [App\Http\Controllers\Admin\ValidatorController::class, 'update'])->name('update');
+                    Route::get('create', [App\Http\Controllers\Admin\ValidatorController::class, 'create'])->name('create');
+                    Route::get('{id}/edit/', [App\Http\Controllers\Admin\ValidatorController::class, 'edit'])->name('edit');
+            });
         });
 
     Route::middleware(['role:validator|admin'])
         ->name('validator.')
-        ->prefix('validator')
+        ->prefix('validador')
         ->group(function () {
-            Route::resource('certificados', App\Http\Controllers\Admin\CertificateController::class);
+
+            Route::name('certificates.')
+                ->prefix('certificados')
+                ->group(function () {
+                    Route::get('{type_situation?}', [App\Http\Controllers\ValidateCertificateController::class, 'index'])->name('index');
+                    Route::post('', [App\Http\Controllers\ValidateCertificateController::class, 'store'])->name('store');
+                    Route::post('{id}', [App\Http\Controllers\ValidateCertificateController::class, 'update'])->name('update');
+                    Route::get('create', [App\Http\Controllers\ValidateCertificateController::class, 'create'])->name('create');
+                    Route::get('{id}/edit/', [App\Http\Controllers\ValidateCertificateController::class, 'edit'])->name('edit');
+                    Route::get('{id}/show', [App\Http\Controllers\ValidateCertificateController::class, 'show'])->name('show');
+                    Route::get('{id}/download/', [App\Http\Controllers\ValidateCertificateController::class, 'download'])->name('download');
+                });
+
         });
 
     // USUÁRIO
@@ -77,7 +102,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             Route::get('{id}/edit/', [App\Http\Controllers\AxleController::class, 'edit'])->middleware(['can:update axles'])->name('edit');
         });
 
-    // EIXO
+    // CURSOS
     Route::name('careers.')
         ->prefix('cursos')
         ->group(function () {
@@ -86,6 +111,32 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             Route::put('{id}', [App\Http\Controllers\CareerController::class, 'update'])->middleware(['can:update careers'])->name('update');
             Route::get('create', [App\Http\Controllers\CareerController::class, 'create'])->middleware(['can:store careers'])->name('create');
             Route::get('{id}/edit/', [App\Http\Controllers\CareerController::class, 'edit'])->middleware(['can:update careers'])->name('edit');
+        });
+
+    // Administrador gerencia situações
+    Route::middleware(['role:admin'])
+        ->name('typeSituations.')
+        ->prefix('situacoes')
+        ->group(function () {
+            Route::get('', [App\Http\Controllers\TypeSituationController::class, 'index'])->name('index');
+            Route::post('', [App\Http\Controllers\TypeSituationController::class, 'store'])->name('store');
+            Route::put('{id}', [App\Http\Controllers\TypeSituationController::class, 'update'])->name('update');
+            Route::get('create', [App\Http\Controllers\TypeSituationController::class, 'create'])->name('create');
+            Route::get('{id}/edit/', [App\Http\Controllers\TypeSituationController::class, 'edit'])->name('edit');
+        });
+
+    // Certificados alunos
+    Route::middleware(['role:student'])
+        ->name('certificates.')
+        ->prefix('certificacoes')
+        ->group(function () {
+            Route::get('create', [App\Http\Controllers\CertificateController::class, 'create'])->name('create');
+            Route::get('{type_situation?}', [App\Http\Controllers\CertificateController::class, 'index'])->name('index');
+            Route::post('', [App\Http\Controllers\CertificateController::class, 'store'])->name('store');
+            Route::post('{id}', [App\Http\Controllers\CertificateController::class, 'update'])->name('update');
+            Route::get('{id}/show', [App\Http\Controllers\CertificateController::class, 'show'])->name('show');
+            Route::get('{id}/edit/', [App\Http\Controllers\CertificateController::class, 'edit'])->name('edit');
+            Route::get('{id}/download/', [App\Http\Controllers\CertificateController::class, 'download'])->name('download');
         });
 });
 

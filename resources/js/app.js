@@ -5,11 +5,16 @@ import { createApp, h } from 'vue';
 import { App as InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
 import VueEllipseProgress from 'vue-ellipse-progress';
-
-
 import VueApexCharts from "vue3-apexcharts";
 
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
+
+import { useToast } from "vue-toastification";
+const toast = useToast();
+
 const el = document.getElementById('app');
+
 
 createApp({
     render: () =>
@@ -20,6 +25,7 @@ createApp({
 })
     .mixin({ methods: {
         route,
+        toast,
         isEmpty(obj) {
             return Object.keys(obj).length === 0;
         },
@@ -27,11 +33,12 @@ createApp({
             return Object
                 .entries(errors)
                 .reduce( (accum, curr) => (accum === '') ? curr[1] : `${accum} - ${curr[1]}`, '');
-        }
+        },
     } })
     .use(InertiaPlugin)
     .use(VueEllipseProgress)
     .use(VueApexCharts)
+    .use(Toast, {})
     .mount(el);
 
 InertiaProgress.init({ color: '#4B5563' });
