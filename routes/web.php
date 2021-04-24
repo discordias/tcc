@@ -78,6 +78,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
                     Route::post('{id}', [App\Http\Controllers\ValidateCertificateController::class, 'update'])->name('update');
                     Route::get('create', [App\Http\Controllers\ValidateCertificateController::class, 'create'])->name('create');
                     Route::get('{id}/edit/', [App\Http\Controllers\ValidateCertificateController::class, 'edit'])->name('edit');
+                    Route::get('{id}/show', [App\Http\Controllers\ValidateCertificateController::class, 'show'])->name('show');
                     Route::get('{id}/download/', [App\Http\Controllers\ValidateCertificateController::class, 'download'])->name('download');
                 });
 
@@ -129,10 +130,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         ->name('certificates.')
         ->prefix('certificacoes')
         ->group(function () {
-            Route::get('', [App\Http\Controllers\CertificateController::class, 'index'])->name('index');
+            Route::get('create', [App\Http\Controllers\CertificateController::class, 'create'])->name('create');
+            Route::get('{type_situation?}', [App\Http\Controllers\CertificateController::class, 'index'])->name('index');
             Route::post('', [App\Http\Controllers\CertificateController::class, 'store'])->name('store');
             Route::post('{id}', [App\Http\Controllers\CertificateController::class, 'update'])->name('update');
-            Route::get('create', [App\Http\Controllers\CertificateController::class, 'create'])->name('create');
+            Route::get('{id}/show', [App\Http\Controllers\CertificateController::class, 'show'])->name('show');
             Route::get('{id}/edit/', [App\Http\Controllers\CertificateController::class, 'edit'])->name('edit');
             Route::get('{id}/download/', [App\Http\Controllers\CertificateController::class, 'download'])->name('download');
         });

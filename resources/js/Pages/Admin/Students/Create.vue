@@ -1,19 +1,7 @@
 <template lang="">
-    <div class="grid-cols-12">
-        <layout>
-            <div class="flex justify-between">
-                    <div class="text-white text-4xl">
-                        Alunos
-                    </div>
-                    <inertia-link
-                        class="text-white text-center text-xl capitalize rounded-md bg-green-500 hover:bg-green-600 pl-2 pr-3 py-3 font-bold"
-                        :href="this.route('admin.students.index')"
-                        ><i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
-                        Lista</inertia-link>
-            </div>
-            <Student-form :form="form" :careers="careers" @salvar="salvar"></Student-form>
-        </layout>
-    </div>
+    <Layout :title="'Cadastro de Aluno'" :routeButton="'admin.students.index'" :textButton="'Lista'">
+        <Student-form :form="form" :careers="careers" @salvar="salvar"></Student-form>
+    </Layout>
 </template>
 
 <script>

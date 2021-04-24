@@ -7,7 +7,6 @@ use App\Models\Axle;
 use App\Models\Certificate;
 use App\Models\TypeSituation;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Inertia\Inertia;
 
@@ -66,7 +65,16 @@ class ValidateCertificateController extends Controller
      */
     public function show($id)
     {
-        //
+        $certificate = Certificate::where('id', $id)
+            ->firstOrFail();
+
+        $certificate->load('TypeSituation');
+        $certificate->load('Axle');
+        $certificate->load('User');
+
+        return Inertia::render('Validator/Certificate/Show', [
+            'certificate' => $certificate,
+        ]);
     }
 
     /**
@@ -84,7 +92,7 @@ class ValidateCertificateController extends Controller
         $certificate->load('user');
         $certificate->load('typeSituation');
 
-        return Inertia::render('Validator/Certificate/Edit', [
+        return Inertia::render('Validator/Certificate/Validate', [
             'certificate' => $certificate,
             'axles' => Axle::all(),
             'typeSituations' => TypeSituation::all(),

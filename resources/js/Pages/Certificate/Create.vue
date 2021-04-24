@@ -1,19 +1,7 @@
 <template lang="">
-    <div class="grid-cols-12">
-        <layout >
-            <div class="flex justify-between">
-                    <div class="text-black text-4xl">
-                        Certificados
-                    </div>
-                    <inertia-link
-                        class="text-white text-center text-xl capitalize rounded-md bg-green-500 hover:bg-green-600 pl-2 pr-3 py-3 font-bold"
-                        :href="this.route('certificates.index')"
-                        ><i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
-                        Lista</inertia-link>
-            </div>
-            <Certificate-form :form="form" @salvar="salvar"></Certificate-form>
-        </layout>
-    </div>
+    <Layout :title="'Certificados'" :routeButton="'certificates.index'" :textButton="'Lista'">
+        <Certificate-form :form="form" @salvar="salvar"></Certificate-form>
+    </Layout>
 </template>
 
 <script>

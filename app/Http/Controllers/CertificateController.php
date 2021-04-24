@@ -20,17 +20,23 @@ class CertificateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($typeSituation = 1)
     {
         $user = User::find(auth()->user()->id);
-        $certificates = $user->certificates()->paginate(10);
+        $certificates = $user->certificates()
+            ->where('type_situation_id', $typeSituation)
+            ->paginate(10);
 
         $certificates->load('typeSituation');
+        $certificates->load('axle');
 
-        // $certificates->load('axle');
+        $typeSituations = TypeSituation::all();
+        $currentTypeSituation = TypeSituation::find($typeSituation);
 
         return Inertia::render('Certificate/Index', [
             'certificates' => $certificates,
+            'typeSituations' => $typeSituations,
+            'currentTypeSituation' => $currentTypeSituation,
         ]);
     }
 
@@ -82,7 +88,17 @@ class CertificateController extends Controller
      */
     public function show($id)
     {
-        //
+        $certificate = Certificate::where('id', $id)
+            ->where('user_id', auth()->user()->id)
+            ->firstOrFail();
+
+        $certificate->load('TypeSituation');
+        $certificate->load('Axle');
+        $certificate->load('User');
+
+        return Inertia::render('Certificate/Show', [
+            'certificate' => $certificate,
+        ]);
     }
 
     /**
@@ -95,6 +111,7 @@ class CertificateController extends Controller
     {
         $certificate = Certificate::where('id', $id)
             ->where('user_id', auth()->user()->id)
+            ->whereNotIn('type_situation_id', [2, 3])
             ->firstOrFail();
 
         return Inertia::render('Certificate/Edit', [
@@ -115,6 +132,7 @@ class CertificateController extends Controller
 
         $certificate = Certificate::where('id', $id)
             ->where('user_id', auth()->user()->id)
+            ->whereNotIn('type_situation_id', [2, 3])
             ->firstOrFail();
 
         $currentFile = $certificate->archive;

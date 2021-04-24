@@ -43,9 +43,9 @@
                             <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal text-center">
                                 <th class="py-3 px-6">Aluno</th>
                                 <th class="py-3 px-6">Titulo</th>
-                                <th class="py-3 px-6">Descrição</th>
-                                <th class="py-3 px-6">Status</th>
-                                <th class="py-3 px-6">Ações</th>
+                                <th class="py-3 px-6">Situação</th>
+                                <th class="py-3 px-6">Detalhes</th>
+                                <th class="py-3 px-6" v-if="canChangeTypeSituation(currentTypeSituation.id)">Ações</th>
                             </tr>
                         </thead>
                         <tbody class="text-gray-600 text-sm font-light">
@@ -62,24 +62,24 @@
                                 </td>
                                 <td class="py-4 px-6 text-center">
                                     <div class="">
-                                        {{certificate.description}}
-                                    </div>
-                                </td>
-                                <td class="py-4 px-6 text-center">
-                                    <div class="">
                                         {{certificate.type_situation.name}}
                                     </div>
                                 </td>
                                 <td class="py-4 px-6 text-center">
                                     <inertia-link
-                                        v-if="canChangeTypeSituation(certificate.type_situation_id)"
                                         class="text-white text-center capitalize rounded-md bg-green-500 hover:bg-green-600 pl-2 pr-3 py-2 font-bold"
-                                        :href="this.route('validator.certificates.edit', certificate.id)"
-                                        ><span class="text-sm">Avaliar</span></inertia-link>
+                                        :href="this.route('validator.certificates.show', certificate.id)"
+                                        ><span class="text-sm">Detalhes</span></inertia-link>
                                     <a  :href="this.route('validator.certificates.download', certificate.id)"
                                         target="_blank"
                                         class="text-white ml-2 text-center capitalize rounded-md bg-green-500 hover:bg-green-600 pl-2 pr-3 py-2 font-bold"
-                                    >Visualizar</a>
+                                    >PDF</a>
+                                </td>
+                                <td class="py-4 px-6 text-center" v-if="canChangeTypeSituation(currentTypeSituation.id)">
+                                    <inertia-link
+                                        class="text-white text-center capitalize rounded-md bg-green-500 hover:bg-green-600 pl-2 pr-3 py-2 font-bold"
+                                        :href="this.route('validator.certificates.edit', certificate.id)"
+                                        ><span class="text-sm">Avaliar</span></inertia-link>
                                 </td>
                             </tr>
 
