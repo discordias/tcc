@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\UserController;
+use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -28,7 +29,12 @@ Route::get('/welcome', function () {
 
 // Redirecionar para pagina de usuários
 Route::get('/', function () {
-    return redirect()->route('users.index');
+    $user = User::find(auth()->user()->id);
+    if ($user->hasRole('admin') || $user->hasRole('validator')) {
+        return redirect()->route('careers.index');
+    } else {
+        return redirect()->route('users.index');
+    }
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
@@ -69,11 +75,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         ->name('validator.')
         ->prefix('validador')
         ->group(function () {
-
             Route::name('certificates.')
                 ->prefix('certificados')
                 ->group(function () {
-                    Route::get('{type_situation?}', [App\Http\Controllers\ValidateCertificateController::class, 'index'])->name('index');
+                    Route::get('{career_id}/{type_situation}', [App\Http\Controllers\ValidateCertificateController::class, 'index'])->name('index');
                     Route::post('', [App\Http\Controllers\ValidateCertificateController::class, 'store'])->name('store');
                     Route::post('{id}', [App\Http\Controllers\ValidateCertificateController::class, 'update'])->name('update');
                     Route::get('create', [App\Http\Controllers\ValidateCertificateController::class, 'create'])->name('create');
@@ -106,10 +111,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::name('careers.')
         ->prefix('cursos')
         ->group(function () {
-            Route::get('', [App\Http\Controllers\CareerController::class, 'index'])->middleware(['can:store careers'])->name('index');
+            Route::get('create', [App\Http\Controllers\CareerController::class, 'create'])->middleware(['can:store careers'])->name('create');
+            Route::get('{id}', [App\Http\Controllers\CareerController::class, 'show'])->middleware(['role:validator|admin'])->name('show');
+            Route::get('', [App\Http\Controllers\CareerController::class, 'index'])->middleware(['role:validator|admin'])->name('index');
             Route::post('', [App\Http\Controllers\CareerController::class, 'store'])->middleware(['can:store careers'])->name('store');
             Route::put('{id}', [App\Http\Controllers\CareerController::class, 'update'])->middleware(['can:update careers'])->name('update');
-            Route::get('create', [App\Http\Controllers\CareerController::class, 'create'])->middleware(['can:store careers'])->name('create');
             Route::get('{id}/edit/', [App\Http\Controllers\CareerController::class, 'edit'])->middleware(['can:update careers'])->name('edit');
         });
 

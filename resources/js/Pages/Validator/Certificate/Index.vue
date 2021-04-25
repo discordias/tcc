@@ -1,39 +1,5 @@
 <template lang="">
-    <Layout :title="'Certificados'">
-
-            <div class="w-full flex justify-end">
-                <div class="relative">
-                    <a
-                    class="text-gray-600 block"
-                    href="#pablo"
-                    v-on:click="toggleDropdown($event)"
-                    ref="btnDropdownRef"
-                    >
-                    <div class="items-center flex">
-                        <span
-                        class="px-3 py-2 text-white rounded-md bg-green-500 hover:bg-green-600 cursor-pointer"
-                        >{{currentTypeSituation.name}}</span>
-                    </div>
-                    </a>
-                    <div
-                    ref="popoverDropdownRef"
-                    class="bg-white absolute text-base z-50 float-left py-2 list-none text-left shadow-lg mt-1"
-                    v-bind:class="{
-                        hidden: !dropdownPopoverShow,
-                        block: dropdownPopoverShow
-                    }"
-                    style="min-width: 12rem"
-                    >
-
-                    <inertia-link v-for="typeSituation in typeSituations" key="typeSituation.id"
-                        class="text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800"
-                        :href="this.route('validator.certificates.index', typeSituation.id)"
-                        ><i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
-                        {{typeSituation.name}}</inertia-link>
-                    </div>
-                </div>
-            </div>
-
+    <Layout :title="`${career.name} - ${currentTypeSituation.name}`">
         <!-- component -->
             <div class="w-full">
 
@@ -104,6 +70,7 @@ export default {
     certificates: Object,
     typeSituations: Array,
     currentTypeSituation: Object,
+    career: Object,
   },
   data() {
     return {

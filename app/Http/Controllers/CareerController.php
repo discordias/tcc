@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CareerResquest;
 use App\Models\Career;
+use App\Models\TypeSituation;
+use App\Models\User;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -56,7 +58,18 @@ class CareerController extends Controller
      */
     public function show($id)
     {
-        //
+        $career = Career::findOrFail($id);
+        $students = User::where('career_id', $id)
+            ->whereHas('roles', fn ($roles) => $roles->where('name', 'student'))
+            ->paginate(20);
+
+        $typeSituations = TypeSituation::all();
+
+        return Inertia::render('Career/Show', [
+            'career' => $career,
+            'students' => $students,
+            'typeSituations' => $typeSituations,
+        ]);
     }
 
     /**

@@ -90,15 +90,6 @@
             <li v-if="hasHole.admin" class="items-center">
                 <inertia-link
                     class="text-white hover:text-gray-200 text-xm uppercase py-3 font-bold block"
-                    href="/cursos"
-                    ><i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
-                    Cursos</inertia-link
-                >
-            </li>
-
-            <li v-if="hasHole.admin" class="items-center">
-                <inertia-link
-                    class="text-white hover:text-gray-200 text-xm uppercase py-3 font-bold block"
                     :href="this.route('typeSituations.index')"
                     ><i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
                     Situações</inertia-link
@@ -132,14 +123,6 @@
                 >
             </li>
 
-            <li v-if="hasHole.admin || hasHole.validator" class="items-center">
-                <inertia-link
-                    class="text-white hover:text-gray-200 text-xm uppercase py-3 font-bold block"
-                    :href="this.route('validator.certificates.index')"
-                    ><i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
-                    Certificados</inertia-link
-                >
-            </li>
         </ul>
       </div>
     </div>

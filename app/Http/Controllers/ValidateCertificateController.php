@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ValidateCertificateRequest;
 use App\Models\Axle;
+use App\Models\Career;
 use App\Models\Certificate;
 use App\Models\TypeSituation;
 use Illuminate\Http\Request;
@@ -17,9 +18,12 @@ class ValidateCertificateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($typeSituation = 1)
+    public function index($careerId, $typeSituation)
     {
+        $career = Career::findOrFail($careerId);
+
         $certificates = Certificate::where('type_situation_id', $typeSituation)
+            ->whereHas('user', fn ($user) => $user->where('career_id', $careerId))
             ->paginate(20);
 
         $certificates->load('user');
@@ -33,6 +37,7 @@ class ValidateCertificateController extends Controller
             'certificates' => $certificates,
             'typeSituations' => $typeSituations,
             'currentTypeSituation' => $currentTypeSituation,
+            'career' => $career,
         ]);
     }
 
