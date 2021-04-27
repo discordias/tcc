@@ -27,18 +27,13 @@
 </template>
 
 <script>
-
 export default {
-    props: {
-        career: Object,
-    },
-    data() {
-        return {
-
-        }
-    },
-    methods: {
-
-    },
-}
+  props: {
+    career: Object,
+  },
+  data() {
+    return {};
+  },
+  methods: {},
+};
 </script>
