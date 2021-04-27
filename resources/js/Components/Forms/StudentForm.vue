@@ -4,17 +4,17 @@
             <form @submit.prevent="salvar" class="px-4 py-5">
                 <div class="grid grid-cols-6 gap-4 mb-4">
                     <div class="col-span-2">
-                        <label for="student_name">Nome</label>
-                        <input type="text" class="w-full" id="student_name" maxlength="100" required v-model="form.name" autofocus/>
+                        <label for="student_name">Nome:</label>
+                        <input type="text" class="w-full focus:ring-orange-uniceplac focus:border-orange-uniceplac block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" id="student_name" maxlength="100" required v-model="form.name" autofocus/>
                     </div>
                     <div class="col-span-2">
-                        <label for="student_email">E-mail</label>
-                        <input type="email" class="w-full" id="student_email" maxlength="50" required v-model="form.email" autofocus/>
+                        <label for="student_email">E-mail:</label>
+                        <input type="email" class="w-full focus:ring-orange-uniceplac focus:border-orange-uniceplac block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" id="student_email" maxlength="50" required v-model="form.email" autofocus/>
                     </div>
                     <div class="col-span-2">
-                        <label for="careers">Cursos</label>
-                        <select id="careers" class="w-full" required v-model="form.career_id">
-                            <option v-for="career in careers" :key="career.id" v-bind:value="career.id">
+                        <label for="careers">Cursos:</label>
+                        <select id="careers" class="w-full focus:ring-orange-uniceplac focus:border-orange-uniceplac block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" required v-model="form.career_id">
+                            <option v-for="career in careers" :key="career.id" v-bind:value="career.id" class="">
                                 {{ career.name }}
                             </option>
                         </select>
@@ -32,21 +32,18 @@
 </template>
 
 <script>
-
 export default {
-    props: {
-        form: Object,
-        careers: Array,
+  props: {
+    form: Object,
+    careers: Array,
+  },
+  data() {
+    return {};
+  },
+  methods: {
+    salvar() {
+      this.$emit("salvar");
     },
-    data() {
-        return {
-
-        }
-    },
-    methods: {
-        salvar() {
-            this.$emit('salvar')
-        }
-    },
-}
+  },
+};
 </script>
