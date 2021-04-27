@@ -18,7 +18,7 @@ class CareerController extends Controller
      */
     public function index()
     {
-        $careers = Career::paginate(10);
+        $careers = Career::withCount('users')->paginate(10);
 
         return Inertia::render('Career/Index', [
             'careers' => $careers,
@@ -63,7 +63,11 @@ class CareerController extends Controller
             ->whereHas('roles', fn ($roles) => $roles->where('name', 'student'))
             ->paginate(20);
 
-        $typeSituations = TypeSituation::all();
+        $typeSituations = TypeSituation::query()
+            ->withCount(['certificates' =>  function ($certificate) use($id) {
+                return $certificate->whereHas('user', fn ($user) => $user->where('career_id', $id) );
+            }])
+            ->get();
 
         return Inertia::render('Career/Show', [
             'career' => $career,
