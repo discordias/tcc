@@ -9,11 +9,11 @@
                 <p class="text-gray-600 font-semibold">{{career.name}}</p>
                 <div class="flex items-baseline space-x-4">
                     <h2 class="text-2xl font-semibold">
-                        34,567
+                        {{career.users_count}}
                     </h2>
                     <p class="text-green-700 flex font-semibold space-x-1">
-                        <span>&#8593;</span>
-                        <span class="font-bold">122</span>
+                        <span>Aluno(s)</span>
+                        <!-- <span class="font-bold">{{career.users_count}}</span> -->
                     </p>
                 </div>
             </div>

@@ -8,11 +8,11 @@
                 <p class="text-gray-600 font-semibold">{{typeSituation.name}}</p>
                 <div class="flex items-baseline space-x-4">
                     <h2 class="text-2xl font-semibold">
-                        34,567
+                        {{ typeSituation.certificates_count }}
                     </h2>
                     <p class="text-green-700 flex font-semibold space-x-1">
-                        <span>&#8593;</span>
-                        <span class="font-bold">122</span>
+                        <span>Certificado(s)</span>
+                        <!-- <span class="font-bold">122</span> -->
                     </p>
                 </div>
             </div>

@@ -28,7 +28,7 @@ Route::get('/welcome', function () {
 });
 
 // Redirecionar para pagina de usuários
-Route::get('/', function () {
+Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
     $user = User::find(auth()->user()->id);
     if ($user->hasRole('admin') || $user->hasRole('validator')) {
         return redirect()->route('careers.index');
