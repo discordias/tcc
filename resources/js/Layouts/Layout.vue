@@ -152,22 +152,25 @@
         class="px-4 md:px-10 mx-auto w-full bg-gray-200 -m-24 h-full flex flex-col justify-between"
       >
         <div class="w-full flex justify-center">
-            <div class="mt-4 w-full max-w-7xl relative bg-white p-10 shadow-md rounded-md ">
-                <!-- <div class="bg-white p-10 shadow-md rounded-md"> -->
-                    <div class="flex justify-between mb-20">
-                        <div v-if="title" class="text-black text-4xl">
-                            {{title}}
-                        </div>
-                        <inertia-link v-if="routeButton"
-                            class="text-white text-center text-xl capitalize rounded-md bg-green-500 hover:bg-green-600 pl-2 pr-3 py-3 font-bold"
-                            :href="this.route(routeButton)"
-                            ><i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
-                            {{ textButton }}</inertia-link>
-                    </div>
-                    <slot></slot>
-                <!-- </div> -->
+          <div
+            class="mt-4 w-full max-w-7xl relative bg-white p-10 shadow-md rounded-md"
+          >
+            <!-- <div class="bg-white p-10 shadow-md rounded-md"> -->
+            <div class="flex justify-between mb-20">
+              <div v-if="title" class="text-black text-4xl">
+                {{ title }}
+              </div>
+              <inertia-link
+                v-if="routeButton"
+                class="text-white text-center text-xl capitalize rounded-md bg-green-500 hover:bg-green-600 pl-2 pr-3 py-3 font-bold"
+                :href="this.route(routeButton)"
+                ><i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
+                {{ textButton }}</inertia-link
+              >
             </div>
-
+            <slot></slot>
+            <!-- </div> -->
+          </div>
         </div>
 
         <!-- FOOTER -->
@@ -239,8 +242,8 @@ import SidebarComponent from "../Components/Dashboard/Sidebar.vue";
 import LineChartComponent from "../Components/Dashboard/LineChart.vue";
 import BarChartComponent from "../Components/Dashboard/BarChart.vue";
 
-import { computed } from 'vue'
-import { usePage } from '@inertiajs/inertia-vue3'
+import { computed } from "vue";
+import { usePage } from "@inertiajs/inertia-vue3";
 
 export default {
   name: "dashboard-page",
@@ -251,18 +254,18 @@ export default {
     BarChartComponent,
   },
   props: {
-      title: null,
-      routeButton: null,
-      textButton: '',
+    title: null,
+    routeButton: null,
+    textButton: "",
   },
   data() {
     return {
-      date: new Date().getFullYear()
-    }
+      date: new Date().getFullYear(),
+    };
   },
   setup() {
-    const hasHole = computed(() => usePage().props.value.hasHole)
-    return { hasHole }
+    const hasHole = computed(() => usePage().props.value.hasHole);
+    return { hasHole };
   },
 };
 </script>
