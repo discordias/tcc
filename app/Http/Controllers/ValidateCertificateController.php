@@ -114,8 +114,10 @@ class ValidateCertificateController extends Controller
     public function update(ValidateCertificateRequest $request, $id)
     {
         $validated = $request->validated();
-        $certificate = Certificate::where('id', $id)
-            ->firstOrFail();
+        $certificate = Certificate::where('id', $id)->with('user')->firstOrFail();
+
+        $careeerId = $certificate->user->career_id;
+        $typeSituationId = $certificate->type_situation_id;
 
         $certificate->axle_id = $validated['axle_id'];
         $certificate->type_situation_id = $validated['type_situation_id'];
@@ -123,7 +125,8 @@ class ValidateCertificateController extends Controller
 
         $certificate->save();
 
-        return redirect()->route('validator.certificates.index')->with('success', 'Validação realizada com Sucesso!');
+        return redirect()->route('validator.certificates.index', ['career_id' => $careeerId, 'type_situation' => $typeSituationId])
+            ->with('success', 'Validação realizada com Sucesso!');
     }
 
     /**

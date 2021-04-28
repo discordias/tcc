@@ -20,9 +20,23 @@ class CertificateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($typeSituation = 1)
+    public function index($typeSituation = null)
     {
+        $userId = auth()->user()->id;
         $user = User::find(auth()->user()->id);
+
+        if ($typeSituation == null) {
+            $typeSituations = TypeSituation::query()
+                ->withCount(['certificates' =>  function ($certificate) use($userId) {
+                return $certificate->whereHas('user', fn ($user) => $user->where('id', $userId) );
+            }])
+            ->get();
+
+            return Inertia::render('Certificate/Index', [
+                'typeSituations' => $typeSituations,
+            ]);
+        }
+
         $certificates = $user->certificates()
             ->where('type_situation_id', $typeSituation)
             ->paginate(10);
@@ -33,7 +47,7 @@ class CertificateController extends Controller
         $typeSituations = TypeSituation::all();
         $currentTypeSituation = TypeSituation::find($typeSituation);
 
-        return Inertia::render('Certificate/Index', [
+        return Inertia::render('Certificate/List', [
             'certificates' => $certificates,
             'typeSituations' => $typeSituations,
             'currentTypeSituation' => $currentTypeSituation,

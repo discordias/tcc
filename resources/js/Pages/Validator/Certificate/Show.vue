@@ -1,5 +1,5 @@
 <template lang="">
-    <Layout :title="'Detalhes Certificado'" :routeButton="'validator.certificates.index'" :textButton="'Lista'">
+    <Layout :title="'Detalhes Certificado'">
         <Certificate-details :certificate="certificate"></Certificate-details>
     </Layout>
 </template>
