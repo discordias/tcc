@@ -5,7 +5,7 @@
                 <div class="grid grid-cols-4 gap-4 mb-4">
                     <div class="col-span-4">
                         <label for="type_situation_name">Nome</label>
-                        <input type="text" class="w-full focus:ring-orange-uniceplac focus:border-orange-uniceplac block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" id="type_situation_name" maxlength="100" required v-model="form.name" autofocus/>
+                        <input type="text" class="w-full focus:ring-orange-uniceplac focus:border-orange-uniceplac block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md shadow-md" id="type_situation_name" maxlength="100" required v-model="form.name" autofocus/>
                     </div>
                 </div>
 

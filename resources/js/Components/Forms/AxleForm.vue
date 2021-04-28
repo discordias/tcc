@@ -5,13 +5,13 @@
                 <div class="grid grid-cols-3 gap-4 mb-4">
                     <div class="col-span-2">
                         <label for="axle_name">Nome</label>
-                        <input type="text" class="w-full focus:ring-orange-uniceplac focus:border-orange-uniceplac block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" id="axle_name" maxlength="100" required v-model="form.name" autofocus/>
+                        <input type="text" class="w-full focus:ring-orange-uniceplac focus:border-orange-uniceplac block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md shadow-md" id="axle_name" maxlength="100" required v-model="form.name" autofocus/>
                     </div>
                 </div>
                 <div>
                     <label for="axle_description">Descrição</label>
                     <textarea   type="text"
-                                class="w-full focus:ring-orange-uniceplac focus:border-orange-uniceplac block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
+                                class="w-full focus:ring-orange-uniceplac focus:border-orange-uniceplac block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md shadow-md"
                                 id="axle_description"
                                 rows="5"
                                 required
