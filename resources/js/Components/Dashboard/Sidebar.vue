@@ -14,10 +14,13 @@
         <i class="fas fa-bars"></i>
       </button>
       <!-- Brand -->
+
       <div class="flex justify-center w-full">
-        <a class="block flex justify-center w-full" href="#">
+        <inertia-link
+                    class="block flex justify-center w-ful"
+                    :href="this.route('careers.index')">
           <img src="/assets/logo-branco.png" class="w-3/4" />
-        </a>
+        </inertia-link>
       </div>
       <!-- User -->
       <ul class="md:hidden items-center flex flex-wrap list-none">
@@ -69,6 +72,24 @@
         </form>
             <!-- Navigation -->
         <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
+            <li v-if="hasHole.admin" class="items-center">
+                <inertia-link
+                    class="text-white hover:text-gray-200 text-xm uppercase py-3 font-bold block"
+                    :href="this.route('careers.index')"
+                    ><i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
+                    Início</inertia-link
+                >
+            </li>
+
+            <li v-if="hasHole.student" class="items-center">
+                <inertia-link
+                    class="text-white hover:text-gray-200 text-xm uppercase py-3 font-bold block"
+                    :href="this.route('certificates.index')"
+                    ><i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
+                    Início</inertia-link
+                >
+            </li>
+
             <li class="items-center">
                 <inertia-link
                 class="text-white hover:text-gray-200 text-xm uppercase py-3 font-bold block"
@@ -111,15 +132,6 @@
                     :href="this.route('admin.validators.index')"
                     ><i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
                     Validadores</inertia-link
-                >
-            </li>
-
-            <li v-if="hasHole.student" class="items-center">
-                <inertia-link
-                    class="text-white hover:text-gray-200 text-xm uppercase py-3 font-bold block"
-                    :href="this.route('certificates.index')"
-                    ><i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
-                    Certificados</inertia-link
                 >
             </li>
 

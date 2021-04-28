@@ -33,7 +33,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
     if ($user->hasRole('admin') || $user->hasRole('validator')) {
         return redirect()->route('careers.index');
     } else {
-        return redirect()->route('users.index');
+        return redirect()->route('certificates.index');
     }
 });
 
@@ -78,13 +78,13 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             Route::name('certificates.')
                 ->prefix('certificados')
                 ->group(function () {
+                    Route::get('{id}/show', [App\Http\Controllers\ValidateCertificateController::class, 'show'])->name('show');
+                    Route::get('{id}/download/', [App\Http\Controllers\ValidateCertificateController::class, 'download'])->name('download');
+                    Route::get('{id}/edit/', [App\Http\Controllers\ValidateCertificateController::class, 'edit'])->name('edit');
                     Route::get('{career_id}/{type_situation}', [App\Http\Controllers\ValidateCertificateController::class, 'index'])->name('index');
                     Route::post('', [App\Http\Controllers\ValidateCertificateController::class, 'store'])->name('store');
                     Route::post('{id}', [App\Http\Controllers\ValidateCertificateController::class, 'update'])->name('update');
                     Route::get('create', [App\Http\Controllers\ValidateCertificateController::class, 'create'])->name('create');
-                    Route::get('{id}/edit/', [App\Http\Controllers\ValidateCertificateController::class, 'edit'])->name('edit');
-                    Route::get('{id}/show', [App\Http\Controllers\ValidateCertificateController::class, 'show'])->name('show');
-                    Route::get('{id}/download/', [App\Http\Controllers\ValidateCertificateController::class, 'download'])->name('download');
                 });
 
         });
