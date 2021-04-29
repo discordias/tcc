@@ -1,5 +1,5 @@
 <template lang="">
-    <Layout :title="'Cadastro de Aluno'" :routeButton="'admin.students.index'" :textButton="'Lista'">
+    <Layout :title="'Cadastro de Aluno'">
         <Student-form :form="form" :careers="careers" @salvar="salvar"></Student-form>
     </Layout>
 </template>

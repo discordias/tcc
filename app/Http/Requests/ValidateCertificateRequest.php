@@ -27,7 +27,9 @@ class ValidateCertificateRequest extends FormRequest
         return [
             'axle_id' => ['required', 'exists:axles,id'],
             'observation' => ['string', 'nullable'],
-            'type_situation_id' => ['required', 'exists:type_situations,id', Rule::notIn([1])]
+            'type_situation_id' => ['required', 'exists:type_situations,id', Rule::notIn([1])],
+            'validated_hours' => ['integer'],
+            'validated_minutes' => ['integer'],
         ];
     }
 }

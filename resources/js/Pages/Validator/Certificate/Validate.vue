@@ -46,7 +46,7 @@ export default {
         }
     },
     mounted() {
-        this.form = this.$inertia.form({...this.certificate,  archive: null});
+        this.form = this.$inertia.form({...this.certificate,  archive: null, validated_hours: 0, validated_minutes: 0});
     },
  }
 </script>

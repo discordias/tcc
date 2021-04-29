@@ -2,7 +2,7 @@
     <div class="w-full">
         <div class="my-6">
             <form @submit.prevent="salvar" class="px-4 py-5">
-                <div class="grid grid-cols-4 gap-4 mb-4">
+                <div class="grid grid-cols-6 gap-4 mb-4">
                     <div class="col-span-2">
                         <label for="certificate_type_situation_id">Situação</label>
                         <select id="certificate_type_situation_id" class="w-full" required v-model="form.type_situation_id">
@@ -17,7 +17,17 @@
                         </select>
                     </div>
 
-                    <div class="col-span-4">
+                    <div class="col-span-1">
+                        <label for="certificate_validated_hours">Horas</label>
+                        <input type="number" step="1" min="0" id="certificate_validated_hours" class="w-full" v-model="form.validated_hours" />
+                    </div>
+
+                    <div class="col-span-1">
+                        <label for="certificate_validated_minutes">Minutos</label>
+                        <input type="number" step="1" min="0" id="certificate_validated_minutes" class="w-full" v-model="form.validated_minutes" />
+                    </div>
+
+                    <div class="col-span-6">
                         <label for="certificate_observation">Observação</label>
                         <textarea   type="text"
                                     class="w-full"
