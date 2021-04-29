@@ -1,6 +1,7 @@
 <template lang="">
     <Layout :title="`Certificados - Situação ${currentTypeSituation.name}`" :routeButton="'certificates.create'" :textButton="'Cadastro'">
         <!-- component -->
+        {{ certificates.data.length }}
         <div class="w-full overflow-x-scroll">
             <div class="bg-white shadow-md rounded my-6">
                 <table class="min-w-max w-full table-auto">

@@ -2,6 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Axle;
+use App\Models\Certificate;
+use App\Models\TypeSituation;
 use App\Models\User;
 use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Auth;
@@ -41,11 +44,19 @@ class HandleInertiaRequests extends Middleware
     {
         if (isset(auth()->user()->id)) {
             $user = User::with('roles')->find(auth()->user()->id);
+            $isStudent = $user->hasRole('student');
         } else {
             $user = null;
+            $isStudent = false;
         }
 
-        // Inertia::share('roles', $roles);
+        if ($isStudent) {
+            $axleWithCount = Axle::withCount(['certificates' => function ($certificates) use ($user) {
+                return $certificates->where('user_id', $user->id)->where('type_situation_id', 2);
+            }])->get();
+        } else {
+            $axleWithCount = [];
+        }
 
         return array_merge(parent::share($request), [
             'hasHole' => [
@@ -57,6 +68,8 @@ class HandleInertiaRequests extends Middleware
             'flash' => [
                 'success' => fn () => $request->session()->get('success')
             ],
+
+            'axleWithCount' => $axleWithCount,
         ]);
     }
 }
