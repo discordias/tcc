@@ -31,7 +31,14 @@
                     </div>
                 </div>
             </div>
-            <div class="flex justify-between items-center mt-2 gap-2">  <button class="w-full h-12 rounded-md bg-orange-uniceplac text-white text-md hover:shadow hover:bg-green-uniceplac">Botão 1</button> <button class="w-full h-12 rounded-md bg-green-uniceplac text-white text-md hover:shadow hover:bg-orange-uniceplac">Botão 2</button></div>
+            <div class="flex justify-between items-center mt-2 gap-2">
+                
+                
+                <a role="button" class="w-full h-12 rounded-md bg-orange-uniceplac hover:bg-green-uniceplac text-white text-md px-4 py-2 justify-center text-center" :href="route('profile.show')"
+                :active="route().current('profile.show')">
+                    Alterar Senha
+                </a>
+            </div>
         </div>
     </div>
 </div>
