@@ -12,7 +12,7 @@
                         <input type="email" class="w-full focus:ring-orange-uniceplac focus:border-orange-uniceplac block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md shadow-md" id="validator_email" maxlength="50" required v-model="form.email" autofocus/>
                     </div>
                 </div>
-                
+
 
                 <div class="mt-4 w-full flex justify-end">
                     <input  type="submit"

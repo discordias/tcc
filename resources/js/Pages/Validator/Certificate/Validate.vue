@@ -1,7 +1,7 @@
 <template lang="">
     <Layout :title="'Certificados'">
         <Certificate-details :certificate="certificate"></Certificate-details>
-        <Validate-certificate-form :form="form" @salvar="salvar" :typeSituations="typeSituations" :axles="axles"></Validate-certificate-form>
+            <Validate-certificate-form :form="form" @salvar="salvar" :typeSituations="typeSituations" :axles="axles"></Validate-certificate-form>
     </Layout>
 </template>
 
@@ -43,7 +43,7 @@ export default {
                     }
                 },
             })
-        }
+        },
     },
     mounted() {
         this.form = this.$inertia.form({...this.certificate,  archive: null, validated_hours: 0, validated_minutes: 0});

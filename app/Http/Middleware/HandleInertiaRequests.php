@@ -51,9 +51,13 @@ class HandleInertiaRequests extends Middleware
         }
 
         if ($isStudent) {
-            $axleWithCount = Axle::withCount(['certificates' => function ($certificates) use ($user) {
-                return $certificates->where('user_id', $user->id)->where('type_situation_id', 2);
-            }])->get();
+            $axleWithCount = Axle::all();
+            $axleWithCount->map(function ($item, $key) use ($user) {
+                $item->total_validated_minutes =  (int) $item->certificates()
+                    ->where('user_id', $user->id)
+                    ->sum('validated_hours_in_minutes');
+                return $item;
+            });
         } else {
             $axleWithCount = [];
         }

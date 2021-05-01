@@ -19,24 +19,22 @@
                       <div
                         class="relative w-full pr-4 max-w-full flex-grow flex-1"
                       >
-                        <h5 class="text-gray-500 uppercase font-bold text-xs">
+                        <div class="text-gray-500 w-full uppercase border-b border-gray-200 text-center font-bold text-lg">
                           {{situation.name}}
-                        </h5>
+                        </div>
                         <span class="font-semibold text-xl text-gray-800">
-                          {{situation.certificates_count}}
+                          {{ formatTimeByMinutes(situation.total_validated_minutes) }} / 50:00
                         </span>
                       </div>
-                      <div class="relative w-auto pl-4 flex-initial">
-                        <div
-                          class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-red-500"
-                        >
-                          <i class="far fa-chart-bar"></i>
-                        </div>
-                      </div>
+
                     </div>
                     <p class="text-sm text-gray-500 mt-4">
-                      <span class="whitespace-no-wrap"> Certificados validados </span>
+                      <span class="whitespace-no-wrap"> {{ ((situation.total_validated_minutes / 3000) * 100) }}%</span>
                     </p>
+
+                    <div class="shadow w-full bg-white">
+                        <div class="bg-orange-uniceplac py-2 text-xs leading-none py-1 text-center text-white" :style="{width: `${ ((situation.total_validated_minutes / 3000) * 100)}%`}"></div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -162,6 +160,13 @@ export default {
     return {
       date: new Date().getFullYear(),
     };
+  },
+  methods: {
+      formatTimeByMinutes: function (totalMinutes) {
+          const hours = Math.floor(totalMinutes / 60);
+          const minutes = totalMinutes % 60;
+          return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+      }
   },
   setup() {
     const hasHole = computed(() => usePage().props.value.hasHole);
