@@ -1,5 +1,5 @@
 <template lang="">
-    <Layout :title="'Situações'" :routeButton="'typeSituations.create'" :textButton="'Cadastro'">
+    <Layout :title="'Situações'">
         <div class="w-full">
             <div class="bg-white shadow-md rounded my-6">
                 <table class="min-w-max w-full table-auto">

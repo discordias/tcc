@@ -72,7 +72,7 @@
         </form>
             <!-- Navigation -->
         <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
-            <li v-if="hasHole.admin" class="items-center">
+            <li v-if="hasHole.admin || hasHole.validator" class="items-center">
                 <inertia-link
                     class="text-white hover:text-gray-200 text-xm uppercase py-3 font-bold block"
                     :href="this.route('careers.index')"

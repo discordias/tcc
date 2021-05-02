@@ -1,7 +1,7 @@
 <template lang="">
     <Layout :title="'Certificados'">
         <Certificate-details :certificate="certificate"></Certificate-details>
-        <Validate-certificate-form :form="form" @salvar="salvar" :typeSituations="typeSituations" :axles="axles"></Validate-certificate-form>
+            <Validate-certificate-form :errors="errors" :form="form" @salvar="salvar" :typeSituations="typeSituations" :axles="axles"></Validate-certificate-form>
     </Layout>
 </template>
 
@@ -30,20 +30,6 @@ export default {
     },
 
     methods: {
-        salvar() {
-           this.form.post(this.route('validator.certificates.update', this.certificate.id), {
-                onFinish: () => {
-                    if (!this.isEmpty(this.errors)) {
-                        this.toast(this.formatTextErrors(this.errors), {type: 'error'});
-                    } else {
-                        this.form.reset();
-                        if (this.$page.props.flash.success) {
-                            this.toast(this.$page.props.flash.success, {type: 'success'});
-                        }
-                    }
-                },
-            })
-        }
     },
     mounted() {
         this.form = this.$inertia.form({...this.certificate,  archive: null, validated_hours: 0, validated_minutes: 0});
