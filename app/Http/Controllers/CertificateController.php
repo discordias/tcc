@@ -109,6 +109,7 @@ class CertificateController extends Controller
         $certificate->load('TypeSituation');
         $certificate->load('Axle');
         $certificate->load('User');
+        $certificate->validated_hours = $certificate->validated_hours;
 
         return Inertia::render('Certificate/Show', [
             'certificate' => $certificate,

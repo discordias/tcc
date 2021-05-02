@@ -3,33 +3,46 @@
         <!-- Card Details -->
         <center>
             <div class="object-none object-center">
-                <div class="max-w-xl bg-white shadow-lg rounded-lg overflow-hidden my-4 justify-center text-center">
-                    <div class="flex items-center px-6 py-3 bg-green-uniceplac justify-center text-center">
+                <div class="max-w-xl bg-white shadow-lg rounded-lg overflow-hidden my-4 justify-center">
+                    <div class="flex items-center px-6 py-3 bg-green-uniceplac justify-center">
 
-                        <h1 class="mx-3 text-white font-semibold text-lg ">{{certificate.title}}</h1>
+                        <h1 class="mx-3 text-white font-semibold text-lg text-center">{{certificate.title}}</h1>
                     </div>
 
                     <div class="py-4 px-6">
-                        <h1 class="text-2xl font-semibold text-gray-800">{{certificate.user.name}}</h1>
-
-                        <p class="py-2 text-lg text-gray-700">Descrição: <br><span>{{certificate.description}}</span></p>
-
-                        <div class="flex items-center mt-4 text-gray-700">
-
-                            <h1 class="px-2 text-sm">Situação: {{certificate.type_situation.name}}</h1>
+                        <div class="mt-3 border-b border-gray-200 pb-4">
+                            <h1 class="text-2xl font-semibold text-gray-800 text-center">{{certificate.user.name}}</h1>
                         </div>
-                        <div class="flex items-center mt-4 text-gray-700">
 
-                            <h1 class="px-2 text-sm">Eixo: {{certificate.axle?.name}}</h1>
+                        <div class="flex items-center mt-6 text-gray-700">
+                            <p class="px-2 text-sm"><span><b>Descrição:</b></span> {{certificate.description}}</p>
                         </div>
-                        <div class="flex items-center mt-4 text-gray-700">
-                            <h1 v-if="certificate.validated_hours" class="px-2 text-sm">Horas: {{certificate.validated_hours}}</h1>
+
+                        <div class="flex items-center mt-3 text-gray-700">
+
+                            <p class="px-2 text-sm"><span><b>Situação:</b></span> {{certificate.type_situation.name}}</p>
                         </div>
-                            <div class="flex flex-row justify-end text-center mb-4">
-                                <button  @click="toggleModal()"
-                                    class="text-white ml-2 text-center capitalize rounded-md cursor-pointer bg-green-uniceplac hover:bg-orange-uniceplac pl-2 pr-3 py-2 font-bold"
-                                >Visualizar Arquivo</button>
-                            </div>
+
+                        <div    v-if="certificate.type_situation_id == 2"
+                                class="flex items-center mt-3 text-gray-700">
+
+                            <p class="px-2 text-sm"><span><b>Eixo:</b></span> {{certificate.axle?.name}}</p>
+                        </div>
+
+                        <div  v-if="certificate.type_situation_id == 2"
+                              class="flex items-center mt-3 text-gray-700">
+                            <p class="px-2 text-sm"><span><b>Horas:</b></span> {{certificate.validated_hours}}</p>
+                        </div>
+
+                        <div class="flex items-center mt-3 text-gray-700">
+                            <p v-if="certificate.observation" class="px-2 text-sm"><span><b>Observação:</b></span> {{certificate.observation}}</p>
+                        </div>
+
+                        <div class="flex flex-row justify-end text-center mb-4 mt-10">
+                            <button  @click="toggleModal()"
+                                class="text-white ml-2 text-center capitalize rounded-md cursor-pointer bg-green-uniceplac hover:bg-orange-uniceplac pl-2 pr-3 py-2 font-bold"
+                            >Visualizar Arquivo</button>
+                        </div>
                     </div>
                 </div>
 

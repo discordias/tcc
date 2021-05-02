@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ValidateCertificateRequest extends FormRequest
+class DenyCertificateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,7 @@ class ValidateCertificateRequest extends FormRequest
     public function rules()
     {
         return [
-            'axle_id' => ['required', 'exists:axles,id'],
-            'observation' => ['string', 'nullable'],
-            'validated_hours' => ['integer', 'min:0'],
-            'validated_minutes' => ['integer', 'max:59', 'min:0'],
+            'observation' => ['string', 'required'],
         ];
     }
 }
