@@ -25,7 +25,7 @@ class CertificateRequest extends FormRequest
     {
         return [
             'title' => ['required', 'max:100'],
-            'description' => ['required'],
+            'description' => ['string', 'required'],
             'archive' => ['required', 'mimes:pdf', 'max:2000']
         ];
     }

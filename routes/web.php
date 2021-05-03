@@ -38,7 +38,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    return redirect()->to('/');
+    // return Inertia::render('Dashboard');
 })->name('dashboard');
 
 // AQUI TUDO QUE FOR AUTENTICADO

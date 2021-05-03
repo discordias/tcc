@@ -10,7 +10,7 @@
           <div>
             <!-- Card stats -->
             <div class="flex flex-wrap justify-center">
-              <div class="w-full lg:w-6/12 xl:w-3/12 px-4" v-for="situation in $page.props.axleWithCount" v-bind:key="situation.id">
+              <div class="w-full lg:w-4/12 xl:w-2/12 px-4" v-for="situation in $page.props.axleWithCount" v-bind:key="situation.id">
                 <div
                   class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg"
                 >
@@ -19,17 +19,17 @@
                       <div
                         class="relative w-full pr-4 max-w-full flex-grow flex-1"
                       >
-                        <div class="text-gray-500 w-full uppercase border-b border-gray-200 text-center font-bold text-lg">
+                        <div class="text-gray-500 w-full uppercase border-b border-gray-200 text-center font-bold text-md">
                           {{situation.name}}
                         </div>
-                        <span class="font-semibold text-xl text-gray-800">
+                        <div class="font-semibold text-xl w-full text-gray-800 text-center">
                           {{ formatTimeByMinutes(situation.total_validated_minutes) }} / 50:00
-                        </span>
+                        </div>
                       </div>
 
                     </div>
                     <p class="text-sm text-gray-500 mt-4">
-                      <span class="whitespace-no-wrap"> {{ ((situation.total_validated_minutes / 3000) * 100) }}%</span>
+                      <span class="whitespace-no-wrap"> {{ ((situation.total_validated_minutes / 3000) * 100).toFixed(2) }}%</span>
                     </p>
 
                     <div class="shadow w-full bg-white">

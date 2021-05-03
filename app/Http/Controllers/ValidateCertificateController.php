@@ -138,7 +138,7 @@ class ValidateCertificateController extends Controller
         $certificate->save();
 
         return redirect()->route('validator.certificates.index', ['career_id' => $careeerId, 'type_situation' => 1])
-            ->with('success', 'Validação realizada com Sucesso!');
+            ->with('success', 'Operação realizada com Sucesso!');
     }
 
         /**
@@ -162,7 +162,7 @@ class ValidateCertificateController extends Controller
         $certificate->save();
 
         return redirect()->route('validator.certificates.index', ['career_id' => $careeerId, 'type_situation' => 1])
-            ->with('success', 'Validação realizada com Sucesso!');
+            ->with('success', 'Operação realizada com Sucesso!');
     }
 
     /**
