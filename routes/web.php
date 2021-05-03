@@ -82,9 +82,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
                     Route::get('{id}/download/', [App\Http\Controllers\ValidateCertificateController::class, 'download'])->name('download');
                     Route::get('{id}/edit/', [App\Http\Controllers\ValidateCertificateController::class, 'edit'])->name('edit');
                     Route::get('{career_id}/{type_situation}', [App\Http\Controllers\ValidateCertificateController::class, 'index'])->name('index');
-                    Route::post('', [App\Http\Controllers\ValidateCertificateController::class, 'store'])->name('store');
-                    Route::post('{id}', [App\Http\Controllers\ValidateCertificateController::class, 'update'])->name('update');
-                    Route::get('create', [App\Http\Controllers\ValidateCertificateController::class, 'create'])->name('create');
+                    Route::post('{id}/accept', [App\Http\Controllers\ValidateCertificateController::class, 'accept'])->name('accept');
+                    Route::post('{id}/deny', [App\Http\Controllers\ValidateCertificateController::class, 'deny'])->name('deny');
                 });
 
         });
@@ -125,9 +124,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         ->prefix('situacoes')
         ->group(function () {
             Route::get('', [App\Http\Controllers\TypeSituationController::class, 'index'])->name('index');
-            Route::post('', [App\Http\Controllers\TypeSituationController::class, 'store'])->name('store');
+            // Route::post('', [App\Http\Controllers\TypeSituationController::class, 'store'])->name('store');
             Route::put('{id}', [App\Http\Controllers\TypeSituationController::class, 'update'])->name('update');
-            Route::get('create', [App\Http\Controllers\TypeSituationController::class, 'create'])->name('create');
+            // Route::get('create', [App\Http\Controllers\TypeSituationController::class, 'create'])->name('create');
             Route::get('{id}/edit/', [App\Http\Controllers\TypeSituationController::class, 'edit'])->name('edit');
         });
 

@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class ValidateCertificateRequest extends FormRequest
 {
@@ -27,7 +26,8 @@ class ValidateCertificateRequest extends FormRequest
         return [
             'axle_id' => ['required', 'exists:axles,id'],
             'observation' => ['string', 'nullable'],
-            'type_situation_id' => ['required', 'exists:type_situations,id', Rule::notIn([1])]
+            'validated_hours' => ['integer', 'min:0'],
+            'validated_minutes' => ['integer', 'max:59', 'min:0'],
         ];
     }
 }

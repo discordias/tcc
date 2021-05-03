@@ -7,7 +7,7 @@
                     <thead>
                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal text-center">
                             <th class="py-3 px-6">Titulo</th>
-                            <th class="py-3 px-6">Situação</th>
+                            <!-- <th class="py-3 px-6">Situação</th> -->
                             <th class="py-3 px-6">Detalhes</th>
                             <th class="py-3 px-6" v-if="allowedEditCertificate(currentTypeSituation.id)">Ações</th>
                         </tr>
@@ -19,11 +19,11 @@
                                     {{certificate.title}}
                                 </div>
                             </td>
-                            <td class="py-4 px-6 text-center">
+                            <!-- <td class="py-4 px-6 text-center">
                                 <div class="">
                                     {{certificate.type_situation.name}}
                                 </div>
-                            </td>
+                            </td> -->
                             <td class="py-4 px-6 text-center">
                                 <inertia-link
                                     class="text-white text-center capitalize rounded-md bg-green-500 hover:bg-green-600 pl-2 pr-3 py-2 font-bold"

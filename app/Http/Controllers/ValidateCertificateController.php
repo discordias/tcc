@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DenyCertificateRequest;
 use App\Http\Requests\ValidateCertificateRequest;
 use App\Models\Axle;
 use App\Models\Career;
@@ -76,6 +77,7 @@ class ValidateCertificateController extends Controller
         $certificate->load('TypeSituation');
         $certificate->load('Axle');
         $certificate->load('User');
+        $certificate->validated_hours = $certificate->validated_hours;
 
         return Inertia::render('Validator/Certificate/Show', [
             'certificate' => $certificate,
@@ -100,7 +102,7 @@ class ValidateCertificateController extends Controller
         return Inertia::render('Validator/Certificate/Validate', [
             'certificate' => $certificate,
             'axles' => Axle::all(),
-            'typeSituations' => TypeSituation::all(),
+            'typeSituations' => TypeSituation::where('id', '!=', 1)->get(),
         ]);
     }
 
@@ -113,19 +115,53 @@ class ValidateCertificateController extends Controller
      */
     public function update(ValidateCertificateRequest $request, $id)
     {
+    }
+
+        /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function accept(ValidateCertificateRequest $request, $id)
+    {
         $validated = $request->validated();
         $certificate = Certificate::where('id', $id)->with('user')->firstOrFail();
-
         $careeerId = $certificate->user->career_id;
-        $typeSituationId = $certificate->type_situation_id;
 
         $certificate->axle_id = $validated['axle_id'];
-        $certificate->type_situation_id = $validated['type_situation_id'];
+        $certificate->type_situation_id = 2;
+        $certificate->observation = $validated['observation'];
+        $certificate->validated_hours_in_minutes = ($validated['validated_hours'] * 60) + $validated['validated_minutes'];
+
+        $certificate->save();
+
+        return redirect()->route('validator.certificates.index', ['career_id' => $careeerId, 'type_situation' => 1])
+            ->with('success', 'Validação realizada com Sucesso!');
+    }
+
+        /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function deny(DenyCertificateRequest $request, $id)
+    {
+        $validated = $request->validated();
+        $certificate = Certificate::where('id', $id)
+            ->with('user')
+            ->firstOrFail();
+        $careeerId = $certificate->user->career_id;
+
+        $certificate->type_situation_id = 3;
         $certificate->observation = $validated['observation'];
 
         $certificate->save();
 
-        return redirect()->route('validator.certificates.index', ['career_id' => $careeerId, 'type_situation' => $typeSituationId])
+        return redirect()->route('validator.certificates.index', ['career_id' => $careeerId, 'type_situation' => 1])
             ->with('success', 'Validação realizada com Sucesso!');
     }
 

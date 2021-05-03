@@ -31,7 +31,7 @@ class TypeSituationController extends Controller
      */
     public function create()
     {
-        return Inertia::render('TypeSituation/Create');
+        // return Inertia::render('TypeSituation/Create');
     }
 
     /**
@@ -42,11 +42,11 @@ class TypeSituationController extends Controller
      */
     public function store(TypeSituationRequest $request)
     {
-        $validated = $request->validated();
+        // $validated = $request->validated();
 
-        TypeSituation::create($validated);
+        // TypeSituation::create($validated);
 
-        return Redirect::back()->with('success', 'Cadastrado com Sucesso!');
+        // return Redirect::back()->with('success', 'Cadastrado com Sucesso!');
     }
 
     /**
