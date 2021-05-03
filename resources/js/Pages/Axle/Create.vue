@@ -22,6 +22,7 @@ export default {
             form: this.$inertia.form({
                 name: '',
                 description: '',
+                archive: '',
             })
         }
     },
@@ -31,10 +32,12 @@ export default {
            this.form.post(this.route('eixo.store'), {
                 onFinish: () => {
                     if (!this.isEmpty(this.errors)) {
-                        alert('Erro aqui ' + this.formatTextErrors(this.errors));
+                        this.toast(this.formatTextErrors(this.errors), {type: 'error'});
                     } else {
                         this.form.reset();
-                        alert('Cadastrado com sucesso');
+                        if (this.$page.props.flash.success) {
+                            this.toast(this.$page.props.flash.success, {type: 'success'});
+                        }
                     }
                 },
             })

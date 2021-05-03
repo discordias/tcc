@@ -28,8 +28,8 @@ export default {
             form: {},
         };
     },
-
     methods: {
+
     },
     mounted() {
         this.form = this.$inertia.form({...this.certificate,  archive: null, validated_hours: 0, validated_minutes: 0});

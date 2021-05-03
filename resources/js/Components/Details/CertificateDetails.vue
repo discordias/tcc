@@ -39,7 +39,8 @@
                         </div>
 
                         <div class="flex flex-row justify-end text-center mb-4 mt-10">
-                            <button  @click="toggleModal()"
+                            <button
+                            @click="toggleModal()"
                                 class="text-white ml-2 text-center capitalize rounded-md cursor-pointer bg-green-uniceplac hover:bg-orange-uniceplac pl-2 pr-3 py-2 font-bold"
                             >Visualizar Arquivo</button>
                         </div>
@@ -69,6 +70,8 @@
              class="fixed z-40 inset-0 opacity-25 bg-black">
         </div>
 
+        <!-- <Modal-certificate :certificate="certificate"></Modal-certificate> -->
+
 
 
 
@@ -76,7 +79,13 @@
 </template>
 
 <script>
+
+// import ModalCertificate from '../../Shared/ModalCertificate';
+
 export default {
+  components: {
+    // ModalCertificate,
+  },
   props: {
     certificate: Object,
   },
@@ -97,6 +106,7 @@ export default {
       }
     },
     toggleModal: function (){
+        // console.log(this.$refs.childComponent);
         this.modalPDF = !this.modalPDF;
     },
   },
