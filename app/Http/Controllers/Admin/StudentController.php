@@ -10,6 +10,7 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\MessageBag;
 use Inertia\Inertia;
@@ -57,10 +58,9 @@ class StudentController extends Controller
 
         try {
 
-            $validated['password'] = bcrypt('password');
+            $validated['password'] = Hash::make('password');
             $user = User::create($validated);
             $user->assignRole('student');
-
             DB::commit();
             return Redirect::back()->with('success', 'Cadastrado com Sucesso!');
         } catch (\Exception $e) {

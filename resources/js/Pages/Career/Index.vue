@@ -1,5 +1,14 @@
 <template lang="">
-    <Layout :title="'Cursos'" :routeButton="'careers.create'" :textButton="'Cadastro'">
+    <Layout v-if="$page.props.hasHole.admin" :title="'Cursos'" :routeButton="'careers.create'" :textButton="'Cadastro'">
+        <div class="flex items-center justify-center">
+            <div class="bg-white rounded w-full">
+                <div class="md:grid md:grid-cols-3 md:gap-4 space-y-4 md:space-y-0 mt-4">
+                    <Card-career v-for="career in careers.data" key="axle.id" :career="career"></Card-career>
+                </div>
+            </div>
+        </div>
+    </Layout>
+    <Layout v-if="$page.props.hasHole.validator" :title="'Cursos'">
         <div class="flex items-center justify-center">
             <div class="bg-white rounded w-full">
                 <div class="md:grid md:grid-cols-3 md:gap-4 space-y-4 md:space-y-0 mt-4">

@@ -22,14 +22,15 @@ class InitialData extends Seeder
             'name' => 'admin',
             'email' => 'admin@email.com',
             'password' => bcrypt('password'),
+            'registration_number' => 1,
         ]);
 
         // Criar usuário admin
-        $validator = User::create([
-            'name' => 'validator',
-            'email' => 'validator@email.com',
-            'password' => bcrypt('password'),
-        ]);
+        // $validator = User::create([
+        //     'name' => 'validator',
+        //     'email' => 'validator@email.com',
+        //     'password' => bcrypt('password'),
+        // ]);
 
         // Criar usuário admin
         // $student = User::create([
@@ -86,7 +87,7 @@ class InitialData extends Seeder
         $releValidator->givePermissionTo($permissionShowAllCertificates);
 
         $admin->assignRole('admin');
-        $validator->assignRole('validator');
+        // $validator->assignRole('validator');
         // $student->assignRole('student');
 
         TypeSituation::create(['name' => 'Enviado']);

@@ -12,12 +12,12 @@
 
     <form @submit.prevent="submit">
       <div>
-        <jet-label for="email" value="Email" />
+        <jet-label for="registration_number" value="registration_number" />
         <jet-input
-          id="email"
-          type="email"
+          id="registration_number"
+          type="text"
           class="mt-1 block w-full"
-          v-model="form.email"
+          v-model="form.registration_number"
           required
           autofocus
         />
@@ -91,7 +91,7 @@ export default {
   data() {
     return {
       form: this.$inertia.form({
-        email: "",
+        registration_number: "",
         password: "",
         remember: false,
       }),

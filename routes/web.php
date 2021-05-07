@@ -1,10 +1,13 @@
 <?php
 
+use App\Exports\UserExport;
 use App\Http\Controllers\Admin\UserController;
+use App\Imports\UsersImport;
 use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Permission\Models\Permission;
 
 /*
@@ -161,3 +164,13 @@ Route::get('layout2', function () {
 Route::get('layout3', function () {
     return Inertia::render('TesteLayouts/Layout3', []);
 })->middleware(['can:store users']);
+
+Route::get('excel', function () {
+    return Excel::download(new UserExport, 'users.xlsx');
+});
+
+Route::get('csv', function () {
+    Excel::import(new UsersImport, 'users.csv');
+
+    return redirect('/')->with('success', 'All good!');
+});

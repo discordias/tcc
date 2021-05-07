@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddRegistrationNumberToUsers extends Migration
+class AlterEmailToUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddRegistrationNumberToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('registration_number', 45)->unique();
+            $table->dropUnique('users_email_unique');
         });
     }
 
@@ -26,7 +26,7 @@ class AddRegistrationNumberToUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('registration_number');
+            $table->unique('users_email_unique');
         });
     }
 }
