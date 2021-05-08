@@ -29,7 +29,7 @@ export default {
       this.form.put(this.route("admin.students.update", this.student.id), {
         onFinish: () => {
             if (!this.isEmpty(this.errors)) {
-                alert(this.formatTextErrors(this.errors));
+                this.toast(this.formatTextErrors(this.errors), {type: 'error'});
             } else {
                 if (this.$page.props.flash.success) {
                     this.toast(this.$page.props.flash.success, {type: 'success'});

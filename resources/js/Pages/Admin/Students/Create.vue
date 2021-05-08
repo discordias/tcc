@@ -24,6 +24,9 @@ export default {
                 name: '',
                 email: '',
                 career_id: '',
+                entry_year: '',
+                entry_semester: '',
+                registration_number: '',
             })
         }
     },

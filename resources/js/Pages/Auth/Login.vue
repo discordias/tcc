@@ -12,7 +12,7 @@
 
     <form @submit.prevent="submit">
       <div>
-        <jet-label for="registration_number" value="registration_number" />
+        <jet-label for="registration_number" value="Matricula" />
         <jet-input
           id="registration_number"
           type="text"

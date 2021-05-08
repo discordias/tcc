@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Certificate;
+use Illuminate\Database\Eloquent\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -21,7 +22,10 @@ class UserExport implements FromCollection, WithHeadings, ShouldAutoSize
     public function collection()
     {
         $certificates = Certificate::select('title', 'description')->get();
-
+        $certificates = new Collection([
+            ['linha 1', 'teste'],
+            ['linha 2', 'teste'],
+        ]);
         return $certificates;
     }
 

@@ -26,7 +26,10 @@ class StudentUpdateRequest extends FormRequest
         return [
             'name' => ['required', 'max:100'],
             'email' => ['required', 'max:50', 'email', 'unique:users,email,' . $this->id],
-            'career_id' => ['required', 'numeric', 'exists:careers,id']
+            'career_id' => ['required', 'numeric', 'exists:careers,id'],
+            'registration_number' => ['required', 'max:45', 'min:1', 'unique:users,registration_number,' . $this->id],
+            'entry_year' => ['required', 'numeric'],
+            'entry_semester' => ['required', 'numeric', 'in:1,2'],
         ];
     }
 }
