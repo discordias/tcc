@@ -58,6 +58,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
                 ->group(function () {
                     Route::get('', [App\Http\Controllers\Admin\StudentController::class, 'index'])->name('index');
                     Route::post('', [App\Http\Controllers\Admin\StudentController::class, 'store'])->name('store');
+                    Route::post('import', [App\Http\Controllers\Admin\StudentController::class, 'import'])->name('import');
                     Route::put('{id}', [App\Http\Controllers\Admin\StudentController::class, 'update'])->name('update');
                     Route::get('create', [App\Http\Controllers\Admin\StudentController::class, 'create'])->name('create');
                     Route::get('{id}/edit/', [App\Http\Controllers\Admin\StudentController::class, 'edit'])->name('edit');

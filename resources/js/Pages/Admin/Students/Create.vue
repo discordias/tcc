@@ -1,6 +1,17 @@
 <template lang="">
     <Layout :title="'Cadastro de Aluno'">
-        <Student-form :form="form" :careers="careers" @salvar="salvar"></Student-form>
+        <div class="border border-gray-300 p-10 rounded shadow-md">
+            <div class="w-full flex justify-center space-x-1 -mt-16">
+                <button class="px-3 py-2 border-2 font-bold border-green-uniceplac focus:outline-none rounded-l-lg"
+                        @click="changeCreateType('individual')"
+                        v-bind:class="[type == 'individual' ? 'text-white bg-green-uniceplac' : 'text-green-uniceplac bg-white']">Individual</button>
+                <button class="px-3 py-2 border-2 font-bold border-green-uniceplac rounded-r-lg focus:outline-none"
+                        @click="changeCreateType('csv')"
+                        v-bind:class="[type == 'csv' ? 'text-white bg-green-uniceplac' : 'text-green-uniceplac bg-white']">Importação CSV</button>
+            </div>
+            <Student-form v-if="type == 'individual'" :form="form" :careers="careers" @salvar="salvar"></Student-form>
+            <Student-import-form v-if="type == 'csv'" :errors="errors" :careers="careers"></Student-import-form>
+        </div>
     </Layout>
 </template>
 
@@ -8,11 +19,13 @@
 
 import Layout from '../../../Layouts/Layout';
 import StudentForm from '../../../Components/Forms/StudentForm';
+import StudentImportForm from '../../../Components/Forms/StudentImportForm';
 
 export default {
     components: {
         Layout,
         StudentForm,
+        StudentImportForm,
     },
     props: {
         errors: Object,
@@ -27,7 +40,8 @@ export default {
                 entry_year: '',
                 entry_semester: '',
                 registration_number: '',
-            })
+            }),
+            type: 'individual',
         }
     },
 
@@ -45,6 +59,10 @@ export default {
                     }
                 },
             })
+        },
+        changeCreateType: function (type) {
+            this.type = type;
+            console.log(this.type);
         }
     },
  }

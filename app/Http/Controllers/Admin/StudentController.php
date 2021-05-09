@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StudentStoreRequest;
 use App\Http\Requests\StudentUpdateRequest;
+use App\Imports\UsersImport;
 use App\Models\Career;
 use App\Models\User;
 use Exception;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\MessageBag;
 use Inertia\Inertia;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StudentController extends Controller
 {
@@ -65,6 +67,32 @@ class StudentController extends Controller
             return Redirect::back()->with('success', 'Cadastrado com Sucesso!');
         } catch (\Exception $e) {
 
+            DB::rollBack();
+            $errors = new MessageBag();
+            $errors->add('store_student_error', 'Ocorreu um erro ao cadastrar o aluno, tente novamente');
+            return Redirect::back()->withErrors($errors);
+        }
+
+    }
+
+        /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function import(Request $request)
+    {
+        // $validated = $request->validated();
+
+        // dd($request->only(['career_id','entry_year','entry_semester']));
+        DB::beginTransaction();
+
+        try {
+            Excel::import(new UsersImport($request->only(['career_id','entry_year','entry_semester'])), $request->file('archive'));
+            DB::commit();
+            return Redirect::back()->with('success', 'Cadastrado com Sucesso!');
+        } catch (\Exception $e) {
             DB::rollBack();
             $errors = new MessageBag();
             $errors->add('store_student_error', 'Ocorreu um erro ao cadastrar o aluno, tente novamente');

@@ -19,8 +19,17 @@
 
                     <div class="col-span-4">
 
-                        <input class="w-96 flex flex-col items-center px-4 py-6 bg-grey-0 rounded-lg shadow-lg cursor-pointer hover:bg-gray-100" type="file" @input="form.archive = $event.target.files[0]"/>
 
+                    <div class="col-span-6 flex mt-4 items-center justify-center bg-grey-lighter">
+                        <label class="w-full flex flex-col items-center px-4 py-6 bg-white text-green-uniceplac rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-green-uniceplac hover:text-white">
+                            <svg class="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+                            </svg>
+                            <span v-if="form.archive === null" class="mt-2 text-base leading-normal">Selecionar um arquivo</span>
+                            <span v-if="form.archive !== null" class="mt-2 text-base leading-normal">Arquivo {{ form.archive.name }} Selecionado</span>
+                            <input class="w-96 flex flex-col items-center px-4 py-6 bg-grey-0 rounded-lg shadow-lg hidden cursor-pointer hover:bg-gray-100" type="file" @input="form.archive = $event.target.files[0]"/>
+                        </label>
+                    </div>
 
                         <!--progress class="" v-if="form.progress" :value="form.progress.percentage" max="100">
                                 {{ form.progress.percentage }}%

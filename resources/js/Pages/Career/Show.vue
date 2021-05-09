@@ -12,9 +12,9 @@
         </div>
 
         <div class="w-full mt-10">
-            <h2 class="text-xl">
-                Alunos
-            </h2>
+            <div class="flex justify-between">
+                <h2 class="text-xl">Alunos</h2>
+            </div>
             <div class="bg-white shadow-md rounded my-6">
                 <table class="min-w-max w-full table-auto">
                     <thead>
