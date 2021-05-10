@@ -4,7 +4,7 @@
             <form @submit.prevent="salvar" class="px-4 py-5">
 
                 <div class="grid grid-cols-6 gap-4 mb-4">
-                    <div class="col-span-2">
+                    <div class="col-span-6 lg:col-span-2">
                         <label for="careers">Curso:</label>
                         <select id="careers" class="w-full focus:ring-orange-uniceplac focus:border-orange-uniceplac block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md shadow-md" required v-model="form.career_id">
                             <option v-for="career in careers" :key="career.id" v-bind:value="career.id" class="">
@@ -13,12 +13,12 @@
                         </select>
                     </div>
 
-                    <div class="col-span-3 lg:col-span-2 2xl:col-span-2">
+                    <div class="col-span-6 lg:col-span-2 2xl:col-span-2">
                         <label for="entry_year">Ano de Entrada:</label>
                         <input type="number" class="w-full focus:ring-orange-uniceplac focus:border-orange-uniceplac block w-full pl-4 pr-4 sm:text-sm border-gray-300 rounded-md shadow-md" id="entry_year" maxlength="50" required v-model="form.entry_year" autofocus/>
                     </div>
 
-                    <div class="col-span-3 lg:col-span-2 2xl:col-span-2">
+                    <div class="col-span-6 lg:col-span-2 2xl:col-span-2">
                         <label for="entry_semester">Semestre de Entrada:</label>
                         <select id="entry_semester" class="w-full focus:ring-orange-uniceplac focus:border-orange-uniceplac block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md shadow-md" required v-model="form.entry_semester">
                             <option  v-bind:value="'1'" class="">1</option>

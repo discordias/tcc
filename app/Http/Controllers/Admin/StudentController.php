@@ -83,22 +83,20 @@ class StudentController extends Controller
      */
     public function import(Request $request)
     {
-        // $validated = $request->validated();
+        $errors = [];
+        $registred = [];
 
-        // dd($request->only(['career_id','entry_year','entry_semester']));
-        DB::beginTransaction();
-
-        try {
-            Excel::import(new UsersImport($request->only(['career_id','entry_year','entry_semester'])), $request->file('archive'));
-            DB::commit();
-            return Redirect::back()->with('success', 'Cadastrado com Sucesso!');
-        } catch (\Exception $e) {
-            DB::rollBack();
-            $errors = new MessageBag();
-            $errors->add('store_student_error', 'Ocorreu um erro ao cadastrar o aluno, tente novamente');
-            return Redirect::back()->withErrors($errors);
+        if ($request->hasFile('archive')) {
+            $import = new UsersImport($request->only(['career_id','entry_year','entry_semester']));
+            $import->import($request->file('archive'));
+            $errors = $import->getErrors();
+            $registred = $import->getRegistred();
         }
 
+        return Inertia::render('Admin/Students/Imports', [
+            'errors' => $errors,
+            'registred' => $registred,
+        ]);
     }
 
     /**
