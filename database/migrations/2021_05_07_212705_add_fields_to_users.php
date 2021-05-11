@@ -14,8 +14,8 @@ class AddFieldsToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('entry_year');
-            $table->integer('entry_semester');
+            $table->integer('entry_year')->nullable()->default(null);
+            $table->integer('entry_semester')->nullable()->default(null);
         });
     }
 

@@ -34,6 +34,9 @@
         "vue-loader": "^16.1.2"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^1.2.35",
+        "@fortawesome/free-solid-svg-icons": "^5.15.3",
+        "@fortawesome/vue-fontawesome": "^3.0.0-3",
         "apexcharts": "^3.26.0",
         "chart.js": "2.9.3",
         "easy-circular-progress": "^1.0.4",

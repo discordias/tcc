@@ -18,4 +18,9 @@ class Career extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    public function CourseCurricula()
+    {
+        return $this->hasMany(CourseCurriculum::class);
+    }
 }

@@ -58,7 +58,7 @@ class CareerController extends Controller
      */
     public function show($id)
     {
-        $career = Career::findOrFail($id);
+        $career = Career::with('CourseCurricula')->findOrFail($id);
         $students = User::where('career_id', $id)
             ->whereHas('roles', fn ($roles) => $roles->where('name', 'student'))
             ->paginate(20);

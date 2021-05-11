@@ -1,6 +1,7 @@
 <template lang="">
     <Layout :title="'Importação de Alunos'" :routeButton="'admin.students.create'" :textButton="'Cadastro'">
         <div class="border border-gray-300 p-10 rounded shadow-md">
+
             <div class="w-full flex justify-center space-x-1 -mt-16">
                 <button class="px-3 py-2 border-2 font-bold border-green-uniceplac focus:outline-none rounded-l-lg"
                         @click="changeType('registred')"
@@ -21,7 +22,7 @@
                             </tr>
                         </thead>
                         <tbody class="text-gray-600 text-sm font-light">
-                            <tr v-for="user in registred" key="user->id" class="border-b border-gray-200 hover:bg-gray-100">
+                            <tr v-for="user in registred" key="user.id" class="border-b border-gray-200 hover:bg-gray-100">
                                 <td class="py-4 px-6 text-center">
                                     <div class="">
                                         {{user.name}}
@@ -85,6 +86,7 @@
                     </table>
                 </div>
             </div>
+
         </div>
 
     </Layout>

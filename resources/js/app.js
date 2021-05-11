@@ -10,6 +10,13 @@ import VueApexCharts from "vue3-apexcharts";
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faPhone, faEdit, faBars, faTimes, faPlusSquare, faChevronCircleDown, faMinusCircle } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faPhone, faEdit, faBars, faTimes, faPlusSquare, faChevronCircleDown, faMinusCircle);
+
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
 import { useToast } from "vue-toastification";
 const toast = useToast();
 
@@ -39,6 +46,7 @@ createApp({
     .use(VueEllipseProgress)
     .use(VueApexCharts)
     .use(Toast, {})
+    .component("font-awesome-icon", FontAwesomeIcon)
     .mount(el);
 
 InertiaProgress.init({ color: '#4B5563' });

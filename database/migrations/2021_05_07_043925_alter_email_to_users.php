@@ -26,7 +26,7 @@ class AlterEmailToUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unique('users_email_unique');
+            $table->unique('email');
         });
     }
 }

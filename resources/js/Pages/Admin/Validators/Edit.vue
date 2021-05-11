@@ -1,6 +1,8 @@
 <template lang="">
     <Layout :title="'Cadastro de Validador'" :routeButton="'admin.validators.index'" :textButton="'Lista'">
-        <Validator-form :form="form" @salvar="salvar"></Validator-form>
+        <div class="border border-gray-300 p-10 rounded shadow-md">
+            <Validator-form :form="form" @salvar="salvar"></Validator-form>
+        </div>
     </Layout>
 </template>
 

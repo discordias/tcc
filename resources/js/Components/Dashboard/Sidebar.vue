@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-no-wrap md:overflow-hidden shadow-xl bg-orange-uniceplac flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6"
+    class="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-no-wrap md:overflow-hidden shadow-2xl bg-orange-uniceplac flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6"
   >
     <div
       class="md:flex-col md:items-stretch md:min-h-full md:flex-no-wrap px-0 flex flex-wrap items-center justify-between w-full mx-auto"
@@ -9,9 +9,9 @@
       <button
         class="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
         type="button"
-        v-on:click="toggleCollapseShow('bg-white m-2 py-3 px-6')"
+        v-on:click="toggleCollapseShow('bg-orange-uniceplac m-2 py-3 px-6')"
       >
-        <i class="fas fa-bars"></i>
+        <font-awesome-icon icon="bars" />
       </button>
       <!-- Brand -->
 
@@ -46,7 +46,7 @@
                 class="md:block text-left md:pb-2 text-gray-700 mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0"
                 href="javascript:void(0)"
               >
-                Tailwind Starter Kit
+                Menu
               </a>
             </div>
             <div class="w-6/12 flex justify-end">
@@ -55,7 +55,7 @@
                 class="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
                 v-on:click="toggleCollapseShow('hidden')"
               >
-                <i class="fas fa-times"></i>
+                <font-awesome-icon icon="times" />
               </button>
             </div>
           </div>

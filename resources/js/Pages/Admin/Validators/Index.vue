@@ -24,9 +24,9 @@
                             </td>
                             <td class="py-4 px-6 text-center">
                                 <inertia-link
-                                    class="text-white text-center capitalize rounded-md bg-green-500 hover:bg-green-600 pl-2 pr-3 py-2 font-bold"
+                                    class="text-white text-center capitalize rounded-md bg-green-500 hover:bg-green-600 pl-3 pr-3 py-2 font-bold"
                                     :href="this.route('admin.validators.edit', validator.id)"
-                                    ><span class="text-sm">Editar</span></inertia-link>
+                                    ><font-awesome-icon icon="edit" /></inertia-link>
                             </td>
                         </tr>
 

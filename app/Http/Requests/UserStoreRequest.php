@@ -26,6 +26,7 @@ class UserStoreRequest extends FormRequest
         return [
             'name' => ['required', 'max:100'],
             'email' => ['required', 'max:50', 'email'],
+            'registration_number' => ['required', 'max:45', 'min:1', 'unique:users,registration_number'],
         ];
     }
 }
