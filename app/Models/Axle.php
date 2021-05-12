@@ -18,4 +18,9 @@ class Axle extends Model
     {
         return $this->hasMany(Certificate::class);
     }
+
+    public function courseCurricula()
+    {
+        return $this->belongsToMany(CourseCurriculum::class)->withTimestamps();
+    }
 }

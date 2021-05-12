@@ -4,21 +4,30 @@
             <form @submit.prevent="salvar" class="px-4 py-5">
 
                 <div class="grid grid-cols-6 gap-4 mb-4">
-                    <div class="col-span-6 2xl:col-span-4">
+                    <div class="col-span-6">
                         <label for="student_name">Nome:</label>
                         <input type="text" class="w-full focus:ring-orange-uniceplac focus:border-orange-uniceplac block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md shadow-md" id="student_name" maxlength="100" required v-model="form.name" autofocus/>
                     </div>
 
-                    <div class="col-span-2">
+                    <div class="col-span-3">
                         <label for="careers">Curso:</label>
-                        <select id="careers" class="w-full focus:ring-orange-uniceplac focus:border-orange-uniceplac block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md shadow-md" required v-model="form.career_id">
+                        <select id="careers" @change="setCurrentCourse()" class="w-full focus:ring-orange-uniceplac focus:border-orange-uniceplac block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md shadow-md" required v-model="form.career_id">
                             <option v-for="career in careers" :key="career.id" v-bind:value="career.id" class="">
                                 {{ career.name }}
                             </option>
                         </select>
                     </div>
 
-                    <div class="col-span-4 2xl:col-span-2">
+                    <div class="col-span-3">
+                        <label for="careers">Grade:</label>
+                        <select id="careers" class="w-full focus:ring-orange-uniceplac focus:border-orange-uniceplac block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md shadow-md" required v-model="form.course_curriculum_id">
+                            <option v-for="curriculum in currentCouser.course_curricula" :key="curriculum.id" v-bind:value="curriculum.id" class="">
+                                {{ curriculum.description }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-span-6 2xl:col-span-2">
                         <label for="student_email">E-mail:</label>
                         <input type="email" class="w-full focus:ring-orange-uniceplac focus:border-orange-uniceplac block w-full pl-4 pr-4 sm:text-sm border-gray-300 rounded-md shadow-md" id="student_email" maxlength="50" required v-model="form.email" autofocus/>
                     </div>
@@ -60,12 +69,21 @@ export default {
     careers: Array,
   },
   data() {
-    return {};
+    return {
+        currentCouser: Object,
+    };
   },
   methods: {
     salvar() {
       this.$emit("salvar");
     },
+    setCurrentCourse: function () {
+        const careers = this.careers.filter(c => c.id === this.form.career_id);
+        this.currentCouser = careers[0];
+    }
   },
+  mounted: function () {
+      this.currentCouser = this.careers.length > 0 ? this.careers[0] : [];
+  }
 };
 </script>

@@ -80,7 +80,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
                 ->prefix('grade')
                 ->group(function () {
                     // Route::get('', [App\Http\Controllers\Admin\CourseCurriculumController::class, 'index'])->name('index');
-                    // Route::post('', [App\Http\Controllers\Admin\CourseCurriculumController::class, 'store'])->name('store');
+                    Route::post('', [App\Http\Controllers\Admin\CourseCurriculumController::class, 'store'])->name('store');
                     // Route::put('{id}', [App\Http\Controllers\Admin\CourseCurriculumController::class, 'update'])->name('update');
                     Route::get('create/{id}', [App\Http\Controllers\Admin\CourseCurriculumController::class, 'create'])->name('create');
                     // Route::get('{id}/edit/', [App\Http\Controllers\Admin\CourseCurriculumController::class, 'edit'])->name('edit');

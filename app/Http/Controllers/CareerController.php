@@ -69,6 +69,8 @@ class CareerController extends Controller
             }])
             ->get();
 
+            // dd($career);
+
         return Inertia::render('Career/Show', [
             'career' => $career,
             'students' => $students,

@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Axle;
 use App\Models\Career;
+use App\Models\CourseCurriculum;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class CourseCurriculumController extends Controller
@@ -46,7 +48,19 @@ class CourseCurriculumController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $courseCurriculum = new CourseCurriculum();
+        $courseCurriculum->minutes_total = $request->total_minutes * 60;
+        $courseCurriculum->description = $request->description;
+        $courseCurriculum->career_id = $request->career_id;
+
+        $courseCurriculum->save();
+
+        foreach ($request->axles as $axle) {
+            $axleModel = Axle::find($axle['id']);
+            $courseCurriculum->axles()->save($axleModel, ['total_minutes' => $axle['total_minutes']]);
+        }
+
+        return redirect()->route('careers.show', ['id' => $request->career_id])->with('success', 'Cadastrado com Sucesso!');
     }
 
     /**

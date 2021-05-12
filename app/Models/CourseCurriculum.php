@@ -13,4 +13,14 @@ class CourseCurriculum extends Model
     {
         return $this->belongsTo(Career::class);
     }
+
+    public function axles()
+    {
+        return $this->belongsToMany(Axle::class)->withTimestamps();
+    }
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

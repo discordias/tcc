@@ -29,6 +29,7 @@ export default {
                 total_minutes: 0,
                 description: '',
                 axles: [],
+                career_id: this.career.id,
             })
         }
     },
@@ -36,7 +37,7 @@ export default {
     methods: {
         salvar() {
             // this.flashMessage.show({status: 'error', title: 'Error Message Title', message: 'Oh, you broke my heart! Shame on you!'})
-           this.form.post(this.route('careers.store'), {
+           this.form.post(this.route('admin.curriculum.store'), {
                 onFinish: () => {
                     if (!this.isEmpty(this.errors)) {
                         this.toast(this.formatTextErrors(this.errors), {type: 'error'});

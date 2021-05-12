@@ -70,4 +70,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Certificate::class);
     }
+
+    public function course_curriculum()
+    {
+        return $this->belongsTo(CourseCurriculum::class);
+    }
 }

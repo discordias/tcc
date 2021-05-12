@@ -41,8 +41,10 @@ class StudentController extends Controller
      */
     public function create()
     {
+        $careers = Career::with('CourseCurricula')->get();
+
         return Inertia::render('Admin/Students/Create', [
-            'careers' => Career::all(),
+            'careers' => $careers,
         ]);
     }
 
@@ -122,8 +124,10 @@ class StudentController extends Controller
             ->whereHas('roles', fn ($roles) => $roles->where('name', 'student'))
             ->firstOrFail();
 
+        $careers = Career::with('CourseCurricula')->get();
+
         return Inertia::render('Admin/Students/Edit', [
-            'careers' => Career::all(),
+            'careers' => $careers,
             'student' => $student,
         ]);
     }
