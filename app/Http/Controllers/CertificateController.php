@@ -129,6 +129,8 @@ class CertificateController extends Controller
             ->whereNotIn('type_situation_id', [2, 3])
             ->firstOrFail();
 
+        $certificate->archive = null;
+
         return Inertia::render('Certificate/Edit', [
             'certificate' => $certificate,
         ]);

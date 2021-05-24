@@ -56,6 +56,7 @@ class UsersImport implements ToCollection, WithHeadingRow, WithValidation, Skips
                     'career_id' => $this->data['career_id'],
                     'entry_year' => $this->data['entry_year'],
                     'entry_semester' => $this->data['entry_semester'],
+                    'course_curriculum_id' => $this->data['course_curriculum_id'],
                 ]);
 
                 $user->assignRole('student');

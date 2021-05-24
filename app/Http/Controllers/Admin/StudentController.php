@@ -89,7 +89,7 @@ class StudentController extends Controller
         $registred = [];
 
         if ($request->hasFile('archive')) {
-            $import = new UsersImport($request->only(['career_id','entry_year','entry_semester']));
+            $import = new UsersImport($request->only(['career_id','entry_year','entry_semester','course_curriculum_id']));
             $import->import($request->file('archive'));
             $errors = $import->getErrors();
             $registred = $import->getRegistred();
@@ -147,9 +147,13 @@ class StudentController extends Controller
 
         $validated = $request->validated();
 
-        $student->name = $validated['name'];
-        $student->email = $validated['email'];
-        $student->career_id = $validated['career_id'];
+        $student->name                 = $validated['name'];
+        $student->email                = $validated['email'];
+        $student->career_id            = $validated['career_id'];
+        $student->course_curriculum_id = $validated['course_curriculum_id'];
+        $student->entry_semester       = $validated['entry_semester'];
+        $student->entry_year           = $validated['entry_year'];
+        $student->registration_number  = $validated['registration_number'];
         $student->save();
 
         return Redirect::back()->with('success', 'Atualizado com Sucesso!');

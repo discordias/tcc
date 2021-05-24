@@ -52,7 +52,7 @@
                 </div>
 
                 <div v-if="levelRegister == 2" class="border border-gray-300 p-10 rounded shadow-md flex flex-col justify-center">
-                    <div v-bind:class="id > 0 ? 'border-t border-gray-200' : ''" class="w-full text-center mt-4 pt-4 pb-2 " v-for="(axle, id) in form.axles" key="id">
+                    <div v-bind:class="id > 0 ? 'border-t border-gray-200' : ''" class="w-full text-center mt-1 mb-1 pt-2 pb-2 " v-for="(axle, id) in form.axles" key="id">
                         <span> {{ axle.axle.name }} - {{axle.total_minutes}} </span>
                         <button
                             type="button"

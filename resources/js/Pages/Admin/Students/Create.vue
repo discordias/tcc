@@ -40,6 +40,7 @@ export default {
                 entry_year: '',
                 entry_semester: '',
                 registration_number: '',
+                course_curriculum_id: null,
             }),
             type: 'individual',
         }

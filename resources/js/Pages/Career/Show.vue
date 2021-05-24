@@ -12,51 +12,6 @@
         </div>
 
         <div class="w-full mt-10">
-            <div class="flex justify-between" >
-                <h2 class="text-xl">Matriz Curricular</h2>
-                <inertia-link  v-if="$page.props.hasHole.admin"
-                    class="text-white text-center capitalize rounded-md bg-green-500 hover:bg-green-600 pl-3 pr-3 py-2 font-bold"
-                    :href="this.route('admin.curriculum.create', career.id)"
-                    ><span class="text-sm">Cadstrar</span><font-awesome-icon class="ml-2" icon="edit" /></inertia-link>
-            </div>
-            <div class="bg-white shadow-md rounded my-6">
-                <table class="min-w-max w-full table-auto">
-                    <thead>
-                        <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal text-center">
-                            <th class="py-3 px-6">Descrição</th>
-                            <th class="py-3 px-6">Total de Horas</th>
-                            <!-- <th class="py-3 px-6">Detalhes</th> -->
-                        </tr>
-                    </thead>
-                    <tbody class="text-gray-600 text-sm font-light">
-                        <tr v-for="curriculum in career.course_curricula" key="curriculum.id" class="border-b border-gray-200 hover:bg-gray-100">
-                            <td class="py-4 px-6 text-center">
-                                <div class="">
-                                    {{curriculum.description}}
-                                </div>
-                            </td>
-                            <td class="py-4 px-6 text-center">
-                                <div class="">
-                                    {{curriculum.minutes_total / 60}}
-                                </div>
-                            </td>
-                            <!-- <td class="py-4 px-6 text-center">
-                                <inertia-link
-                                    class="text-white text-center capitalize rounded-md bg-green-500 hover:bg-green-600 pl-2 pr-4 py-2 font-bold"
-
-                                    ><font-awesome-icon class="ml-2" icon="info" /></inertia-link>
-                            </td> -->
-                        </tr>
-
-                    </tbody>
-                </table>
-                <div class="px-6 pb-4 bg-white">
-                    <pagination :data="students" />
-                </div>
-            </div>
-        </div>
-
-        <div class="w-full mt-10">
             <div class="flex justify-between">
                 <h2 class="text-xl">Alunos</h2>
             </div>
@@ -88,6 +43,51 @@
                                     title="Editar"
                                     ><font-awesome-icon icon="edit" /></inertia-link>
                             </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <div class="px-6 pb-4 bg-white">
+                    <pagination :data="students" />
+                </div>
+            </div>
+        </div>
+
+                <div class="w-full mt-10" v-if="$page.props.hasHole.admin">
+            <div class="flex justify-between" >
+                <h2 class="text-xl">Matriz Curricular</h2>
+                <inertia-link
+                    class="text-white text-center capitalize rounded-md bg-green-500 hover:bg-green-600 pl-3 pr-3 py-2 font-bold"
+                    :href="this.route('admin.curriculum.create', career.id)"
+                    ><span class="text-sm">Cadstrar</span><font-awesome-icon class="ml-2" icon="edit" /></inertia-link>
+            </div>
+            <div class="bg-white shadow-md rounded my-6">
+                <table class="min-w-max w-full table-auto">
+                    <thead>
+                        <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal text-center">
+                            <th class="py-3 px-6">Descrição</th>
+                            <th class="py-3 px-6">Total de Horas</th>
+                            <!-- <th class="py-3 px-6">Detalhes</th> -->
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-600 text-sm font-light">
+                        <tr v-for="curriculum in career.course_curricula" key="curriculum.id" class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-4 px-6 text-center">
+                                <div class="">
+                                    {{curriculum.description}}
+                                </div>
+                            </td>
+                            <td class="py-4 px-6 text-center">
+                                <div class="">
+                                    {{curriculum.minutes_total / 60}}
+                                </div>
+                            </td>
+                            <!-- <td class="py-4 px-6 text-center">
+                                <inertia-link
+                                    class="text-white text-center capitalize rounded-md bg-green-500 hover:bg-green-600 pl-2 pr-4 py-2 font-bold"
+
+                                    ><font-awesome-icon class="ml-2" icon="info" /></inertia-link>
+                            </td> -->
                         </tr>
 
                     </tbody>

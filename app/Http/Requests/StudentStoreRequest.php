@@ -30,6 +30,7 @@ class StudentStoreRequest extends FormRequest
             'registration_number' => ['required', 'max:45', 'min:1', 'unique:users,registration_number'],
             'entry_year' => ['required', 'numeric'],
             'entry_semester' => ['required', 'numeric', 'in:1,2'],
+            'course_curriculum_id' => ['required', 'exists:course_curricula,id'],
         ];
     }
 }
