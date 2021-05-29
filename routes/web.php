@@ -62,6 +62,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
                     Route::put('{id}', [App\Http\Controllers\Admin\StudentController::class, 'update'])->name('update');
                     Route::get('create', [App\Http\Controllers\Admin\StudentController::class, 'create'])->name('create');
                     Route::get('{id}/edit/', [App\Http\Controllers\Admin\StudentController::class, 'edit'])->name('edit');
+                    Route::get('{id}', [App\Http\Controllers\Admin\StudentController::class, 'show'])->name('show');
             });
 
             // Administrador gerencia validadores
@@ -158,6 +159,14 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             Route::get('{id}/show', [App\Http\Controllers\CertificateController::class, 'show'])->name('show');
             Route::get('{id}/edit/', [App\Http\Controllers\CertificateController::class, 'edit'])->name('edit');
             Route::get('{id}/download/', [App\Http\Controllers\CertificateController::class, 'download'])->name('download');
+        });
+
+    Route::middleware(['role:validator|admin'])
+            ->name('report.')
+            ->prefix('relatorios')
+            ->group(function () {
+                Route::get('certificados/{career_id?}', [App\Http\Controllers\Report::class, 'certificates'])->name('certificates');
+                Route::get('certificados/{career_id?}/exportar', [App\Http\Controllers\Report::class, 'exportCertificates'])->name('certificates.export');
         });
 });
 

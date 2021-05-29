@@ -18,7 +18,18 @@ class CareerController extends Controller
      */
     public function index()
     {
-        $careers = Career::withCount('users')->paginate(10);
+        $user = User::with('careers')->find(auth()->id());
+
+        if ($user->hasRole('admin')) {
+            $careers = Career::withCount('users')->paginate(10);
+        } else {
+            $careers_id = $user->careers->map(function ($career) {
+                return $career->id;
+            });
+            $careers = Career::withCount('users')
+                ->whereIn('id', $careers_id)
+                ->paginate(10);
+        }
 
         return Inertia::render('Career/Index', [
             'careers' => $careers,

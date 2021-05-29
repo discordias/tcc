@@ -2,21 +2,29 @@
     <div class="w-full">
         <div class="bg-white rounded my-6">
             <form @submit.prevent="salvar" class="px-4 py-5">
-                <div class="grid grid-cols-6 gap-4 mb-4">
+                <div class="grid grid-cols-6 gap-4 mb-16">
                     <div class="col-span-6 lg:col-span-2">
                         <label for="validator_name">Nome</label>
-                        <input type="text" class="w-full focus:ring-orange-uniceplac focus:border-orange-uniceplac block w-full pl-3 pr-3 sm:text-sm border-gray-300 rounded-md shadow-md" id="validator_name" maxlength="100" required v-model="form.name"/>
+                        <input type="text" class="w-full focus:ring-orange-uniceplac focus:border-orange-uniceplac block w-full pl-3 pr-3 sm:text-sm border-gray-300 rounded-md shadow-md" id="validator_name" maxlength="100" required v-model="formValidator.name"/>
                     </div>
                     <div class="col-span-6 lg:col-span-2">
                         <label for="validator_email">E-mail</label>
-                        <input type="email" class="w-full focus:ring-orange-uniceplac focus:border-orange-uniceplac block w-full pl-3 pr-3 sm:text-sm border-gray-300 rounded-md shadow-md" id="validator_email" maxlength="50" required v-model="form.email"/>
+                        <input type="email" class="w-full focus:ring-orange-uniceplac focus:border-orange-uniceplac block w-full pl-3 pr-3 sm:text-sm border-gray-300 rounded-md shadow-md" id="validator_email" maxlength="50" required v-model="formValidator.email"/>
                     </div>
                     <div class="col-span-6 lg:col-span-2">
                         <label for="registration_number">Matricula</label>
-                        <input type="number" min="1" class="w-full focus:ring-orange-uniceplac focus:border-orange-uniceplac block w-full pl-3 pr-3 sm:text-sm border-gray-300 rounded-md shadow-md" id="registration_number" maxlength="50" required v-model="form.registration_number"/>
+                        <input type="number" min="1" class="w-full focus:ring-orange-uniceplac focus:border-orange-uniceplac block w-full pl-3 pr-3 sm:text-sm border-gray-300 rounded-md shadow-md" id="registration_number" maxlength="50" required v-model="formValidator.registration_number"/>
                     </div>
                 </div>
 
+                <div class="border border-gray-600 rounded-md p-8 flex justify-center">
+                    <label  v-for="career in careers"
+                            class="border border-green-uniceplac cursor-pointer m-2 py-2 px-2 rounded-md"
+                            :class="[ careerIsChecked(career.id) ? 'text-white bg-green-uniceplac ': 'text-green-uniceplac' ]"
+                            key="career.id">
+                        <input class="hidden"  type="checkbox" v-bind:value="career.id" v-model="formValidator.careers_id" > {{career.name}}
+                    </label>
+                </div>
 
                 <div class="mt-8 w-full flex justify-center">
                     <input  type="submit"
@@ -31,16 +39,22 @@
 <script>
 export default {
   props: {
-    form: Object,
-    careers: Array,
+    formValidator: {},
+    careers: Object,
   },
   data() {
-    return {};
+    return {
+    };
   },
   methods: {
     salvar() {
       this.$emit("salvar");
     },
+    careerIsChecked(value) {
+        return this.formValidator.careers_id !== undefined
+            ? this.formValidator.careers_id.includes(value)
+            : false;
+    }
   },
 };
 </script>

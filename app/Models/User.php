@@ -75,4 +75,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(CourseCurriculum::class);
     }
+
+    public function careers()
+    {
+        return $this->belongsToMany(Career::class, 'validator_careers', 'user_id', 'career_id');
+    }
 }

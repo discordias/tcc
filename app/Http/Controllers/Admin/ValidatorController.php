@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Models\Career;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -35,7 +36,11 @@ class ValidatorController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Admin/Validators/Create');
+        $careers = Career::all();
+
+        return Inertia::render('Admin/Validators/Create', [
+            'careers' => $careers,
+        ]);
     }
 
     /**
@@ -55,6 +60,9 @@ class ValidatorController extends Controller
             $validated['password'] = bcrypt('password');
             $user = User::create($validated);
             $user->assignRole('validator');
+            $user->load('careers');
+
+            $user->careers()->sync($validated['careers_id']);
 
             DB::commit();
             return Redirect::back()->with('success', 'Cadastrado com Sucesso!');
@@ -87,11 +95,19 @@ class ValidatorController extends Controller
     public function edit($id)
     {
         $validator = User::where('id', $id)
+            ->with('careers')
             ->whereHas('roles', fn ($roles) => $roles->where('name', 'validator'))
             ->firstOrFail();
 
+        $validator->careers_id = $validator->careers->map(function ($career) {
+            return $career->id;
+        });
+
+        $careers = Career::all();
+
         return Inertia::render('Admin/Validators/Edit', [
             'validator' => $validator,
+            'careers' => $careers,
         ]);
     }
 
@@ -105,14 +121,16 @@ class ValidatorController extends Controller
     public function update(UserUpdateRequest $request, $id)
     {
         $validator = User::where('id', $id)
-        ->whereHas('roles', fn ($roles) => $roles->where('name', 'validator'))
-        ->firstOrFail();
+            ->whereHas('roles', fn ($roles) => $roles->where('name', 'validator'))
+            ->firstOrFail();
 
         $validated = $request->validated();
 
         $validator->name = $validated['name'];
         $validator->email = $validated['email'];
         $validator->save();
+
+        $validator->careers()->sync($validated['careers_id']);
 
         return Redirect::back()->with('success', 'Atualizado com Sucesso!');
     }

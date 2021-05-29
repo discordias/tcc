@@ -1,7 +1,7 @@
 <template lang="">
     <Layout :title="'Cadastro de Validador'" :routeButton="'admin.validators.index'" :textButton="'Lista'">
         <div class="border border-gray-300 p-10 rounded shadow-md">
-            <Validator-form :form="form" @salvar="salvar"></Validator-form>
+            <Validator-form :formValidator="formValidator" :careers="careers" @salvar="salvar"></Validator-form>
         </div>
     </Layout>
 </template>
@@ -18,15 +18,18 @@ export default {
   props: {
     errors: Object,
     validator: {},
+    careers: Object,
   },
   data() {
     return {
       form: {},
+      formValidator: {},
     };
   },
 
   methods: {
     salvar() {
+      this.form = this.$inertia.form(this.formValidator);
       this.form.put(this.route("admin.validators.update", this.validator.id), {
         onFinish: () => {
             if (!this.isEmpty(this.errors)) {
@@ -42,7 +45,8 @@ export default {
   },
 
   mounted() {
-    this.form = this.$inertia.form(this.validator);
+    // this.form = this.$inertia.form({...{careers: [1, 2]},...this.validator});
+    this.formValidator = {...this.validator};
   },
 };
 </script>

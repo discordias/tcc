@@ -7,6 +7,7 @@ use App\Http\Requests\StudentStoreRequest;
 use App\Http\Requests\StudentUpdateRequest;
 use App\Imports\UsersImport;
 use App\Models\Career;
+use App\Models\Certificate;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -109,7 +110,25 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        //
+        $student = User::where('id', $id)
+            ->with(['career', 'course_curriculum'])
+            ->whereHas('roles', fn ($roles) => $roles->where('name', 'student'))
+            ->firstOrFail();
+
+        $certificates = Certificate::query()
+            ->with(['TypeSituation', 'Axle'])
+            ->where('user_id', $id)
+            ->get();
+
+        $certificates = $certificates->map(function ($certificate) {
+            $certificate->validated_hours = $certificate->validated_hours;
+            return $certificate;
+        });
+
+        return Inertia::render('Admin/Students/Show', [
+            'student' => $student,
+            'certificates' => $certificates,
+        ]);
     }
 
     /**

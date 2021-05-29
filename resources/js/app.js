@@ -11,9 +11,9 @@ import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faPhone, faEdit, faBars, faTimes, faPlusSquare, faChevronCircleDown, faMinusCircle, faInfo } from "@fortawesome/free-solid-svg-icons";
+import icons from './fontawesome';
 
-library.add(faPhone, faEdit, faBars, faTimes, faPlusSquare, faChevronCircleDown, faMinusCircle, faInfo);
+library.add({...icons});
 
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 

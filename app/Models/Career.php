@@ -23,4 +23,9 @@ class Career extends Model
     {
         return $this->hasMany(CourseCurriculum::class);
     }
+
+    public function validators()
+    {
+        return $this->belongsToMany(User::class, 'validator_careers', 'career_id', 'user_id');
+    }
 }
