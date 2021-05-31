@@ -12,10 +12,14 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 class CertificateExport implements FromCollection, WithHeadings, ShouldAutoSize, WithStyles
 {
     private int $careerId;
+    private $year;
+    private int $limit;
 
-    public function __construct(int $careerId)
+    public function __construct(int $careerId, $year, int $limit)
     {
         $this->careerId = $careerId;
+        $this->year = $year;
+        $this->limit = $limit;
     }
     /**
     * @return \Illuminate\Support\Collection
@@ -27,13 +31,21 @@ class CertificateExport implements FromCollection, WithHeadings, ShouldAutoSize,
             ->withSum(['certificates' => fn ($certificate) => $certificate->where('type_situation_id', '=', 2)], 'validated_hours_in_minutes')
             ->with(['course_curriculum'])
             ->whereHas('roles', fn ($roles) => $roles->where('name', 'student'))
-            ->where('career_id', '=', $this->careerId)
-            ->get();
+            ->where('career_id', '=', $this->careerId);
+
+
+        if ($this->year !== 'Todos' && is_numeric($this->year)) {
+            $students->where('entry_year', '=', $this->year);
+        }
+
+        $students = $students->limit($this->limit)->get();
 
         return $students->map(function ($student) {
 
             return [
+                'Semestre Ingresso' => $student->entry_semester . '/' . $student->entry_year,
                 'nome' => $student->name,
+                'matricula' => $student->registration_number,
                 'E-mail' => $student->email,
                 'Total Realizado' => $student->certificates_sum_validated_hours_in_minutes
                     ? $this->formatHours($student->certificates_sum_validated_hours_in_minutes)
@@ -56,7 +68,7 @@ class CertificateExport implements FromCollection, WithHeadings, ShouldAutoSize,
 
     public function headings(): array
     {
-        return ["Nome", "E-mail", "Total Realizado", "Porcentagem %", "Quantidade Necessário"];
+        return ["Semestre Ingresso", "Nome", "Matricula", "E-mail", "Total Realizado", "Porcentagem %", "Quantidade Necessário"];
     }
 
     public function styles(Worksheet $sheet)
@@ -64,6 +76,7 @@ class CertificateExport implements FromCollection, WithHeadings, ShouldAutoSize,
         $sheet->getStyle('A1:G1')->getAlignment()->applyFromArray(
             ['horizontal' => 'center', 'vertical' => 'center']
         );
+
         // return [
         //     // Style the first row as bold text.
         //     1    => ['font' => ['bold' => true]],

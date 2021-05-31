@@ -165,8 +165,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             ->name('report.')
             ->prefix('relatorios')
             ->group(function () {
-                Route::get('certificados/{career_id?}', [App\Http\Controllers\Report::class, 'certificates'])->name('certificates');
-                Route::get('certificados/{career_id?}/exportar', [App\Http\Controllers\Report::class, 'exportCertificates'])->name('certificates.export');
+                Route::get('certificados/{career_id?}/{year?}/{limit?}', [App\Http\Controllers\Report::class, 'certificates'])->name('certificates');
+                Route::get('certificados/{career_id?}/{year?}/{limit?}/exportar', [App\Http\Controllers\Report::class, 'exportCertificates'])->name('certificates.export');
         });
 });
 

@@ -20,8 +20,10 @@ class Report extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function certificates($careerId = 1)
+    public function certificates($careerId = 1, $year = 'Todos', $limit = 10)
     {
+
+        // dd($semesterId);
         // $year = 2021;
         // $month = 1;
 
@@ -42,19 +44,31 @@ class Report extends Controller
         $students = User::query()
             ->withSum(['certificates' => fn ($certificate) => $certificate->where('type_situation_id', '=', 2)], 'validated_hours_in_minutes')
             ->with(['course_curriculum'])
-            ->whereHas('roles', fn ($roles) => $roles->where('name', 'student'))
-            ->where('career_id', '=', $career->id)
-            ->paginate(20);
+            ->whereHas('roles', fn ($roles) => $roles->where('name', 'student'));
 
+        if ($year !== 'Todos' && is_numeric($year)) {
+            $students->where('entry_year', '=', $year);
+        }
+
+        $students = $students
+            ->where('career_id', '=', $career->id)
+            ->paginate($limit);
+
+        $years = ['Todos', ...range(2017, date('Y'), 1)];
+
+        // dd($students);
         return Inertia::render('Report/Certificates', [
             'career' => $career,
             'students' => $students,
             'careers' => $careers,
+            'years' => $years,
+            'currentYear' => $year,
+            'currentLimit' => $limit,
         ]);
     }
 
-    public function exportCertificates($careerId = 1)
+    public function exportCertificates($careerId = 1, $year = 'Todos', $limit = 10)
     {
-        return Excel::download(new CertificateExport((int) $careerId), 'certificados.xlsx');
+        return Excel::download(new CertificateExport((int) $careerId, $year, $limit), 'certificados.xlsx');
     }
 }
